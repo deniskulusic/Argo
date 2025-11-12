@@ -745,7 +745,11 @@ p {
   flex-direction: column;
   z-index: 10;
   transition: 0.5s ease-in-out;
-  opacity: 98%;
+  opacity: 0;
+}
+
+.nav-loaded {
+  opacity: 1;
 }
 
 .menu-div::-webkit-scrollbar {
@@ -798,8 +802,6 @@ p {
 }
 
 .menu-div {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   overflow: scroll;
   height: 0;
   transition: 700ms cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -934,8 +936,8 @@ p {
 
 .menu-active {
   background: rgba(1, 49, 170, 0) !important;
-  -webkit-backdrop-filter: blur(300px) !important;
-          backdrop-filter: blur(300px) !important;
+  -webkit-backdrop-filter: blur(300px) saturate(1) !important;
+          backdrop-filter: blur(300px) saturate(1) !important;
   opacity: 100%;
 }
 .menu-active .main-button {
@@ -1017,7 +1019,6 @@ header video, header img {
 }
 
 .header-text {
-  padding-top: 2vw;
   transition-duration: 1s;
   transition-delay: 0.7s;
   transition-property: opacity, padding-top, height;

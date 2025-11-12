@@ -181,14 +181,24 @@ requestAnimationFrame(raf);
   /* ===== BASIC ===== */
   let WindowHeight=window.innerHeight;
   const header = document.querySelector('header');
+  const nav = document.querySelector('.menu-full');
   let Section6=document.querySelector('.section-6');
   let Section6Elements=document.querySelectorAll('.section-6-element');
-  const Section6ImgsFromTop=window.pageYOffset + Section6.getBoundingClientRect().top;
+  let Section6ImgsFromTop=window.pageYOffset + Section6.getBoundingClientRect().top;
   const menu = document.querySelector('.menu-full');
   const growSection = document.querySelectorAll('.grow-section');
   let SectionArgo2=document.querySelector(".section-argo-2-img");
-  const SectionArgo2FromTop=window.pageYOffset + SectionArgo2.getBoundingClientRect().top;
-  if (header) header.classList.add('header-loaded');
+  let SectionArgo2FromTop=window.pageYOffset + SectionArgo2.getBoundingClientRect().top;
+  let PreFooter=document.querySelector('.pre-footer');
+  let PreFooterElements=document.querySelectorAll('.image-group div');
+  let PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
+window.addEventListener("resize", function () {
+  PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
+  SectionArgo2FromTop=window.pageYOffset + SectionArgo2.getBoundingClientRect().top;
+  Section6ImgsFromTop=window.pageYOffset + Section6.getBoundingClientRect().top;
+  });
+
+  
 
   // Parallax via [data-lenis-speed]
   const SCALE = 0.1;
@@ -233,36 +243,46 @@ requestAnimationFrame(raf);
     
     });
 
-    if (Section6Elements[0].getBoundingClientRect().top - 1.5*WindowHeight < 0 &&
-      Section6Elements[0].getBoundingClientRect().top + Section6Elements[0].clientHeight + 0.5*WindowHeight  > 0) {
+    if (Section6.getBoundingClientRect().top - 1.5*WindowHeight < 0 && Section6.getBoundingClientRect().top + Section6.clientHeight + 0.5*WindowHeight  > 0) {
+        Section6Elements[0].animate({
+          transform: "translateY(" + (0.08 * (Section6ImgsFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        Section6Elements[1].animate({
+          transform: "translateY(" + (0.15 * (Section6ImgsFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        Section6Elements[2].animate({
+          transform: "translateY(" + (0.22 * (Section6ImgsFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        
+    }
 
-    Section6Elements[0].animate({
-      transform: "translateY(" + (0.08 * (Section6ImgsFromTop - scroll)) + "px )"
-    }, { duration: 1500, fill: "forwards" });
-  }
-if (Section6Elements[1].getBoundingClientRect().top - WindowHeight < 0 &&
-      Section6Elements[1].getBoundingClientRect().top + Section6Elements[1].clientHeight > 0) {
-
-    Section6Elements[1].animate({
-      transform: "translateY(" + (0.15 * (Section6ImgsFromTop - scroll)) + "px )"
-    }, { duration: 1500, fill: "forwards" });
-  }
-  if (Section6Elements[2].getBoundingClientRect().top - WindowHeight < 0 &&
-      Section6Elements[2].getBoundingClientRect().top + Section6Elements[2].clientHeight > 0) {
-        console.log(scroll)
-    Section6Elements[2].animate({
-      transform: "translateY(" + (0.22 * (Section6ImgsFromTop - scroll)) + "px )"
-    }, { duration: 1500, fill: "forwards" });
-  }
 
   
-  if (SectionArgo2.getBoundingClientRect().top - WindowHeight < 0 &&
-      SectionArgo2.getBoundingClientRect().top + SectionArgo2.clientHeight > 0) {
-        console.log(scroll)
-    SectionArgo2.animate({
-      transform: "translateY(" + (-0.1 * (SectionArgo2FromTop - scroll)) + "px )"
-    }, { duration: 1500, fill: "forwards" });
-  }
+    if (SectionArgo2.getBoundingClientRect().top - WindowHeight < 0 && SectionArgo2.getBoundingClientRect().top + SectionArgo2.clientHeight > 0) {
+        SectionArgo2.animate({
+          transform: "translateY(" + (-0.1 * (SectionArgo2FromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+    }
+
+    if (PreFooter.getBoundingClientRect().top - 1.5*WindowHeight < 0 && PreFooter.getBoundingClientRect().top + PreFooter.clientHeight + 0.5*WindowHeight  > 0) {
+        PreFooterElements[0].animate({
+          transform: "translateY(" + (0.22 * (PreFooterFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        PreFooterElements[1].animate({
+          transform: "translateY(" + (0.15 * (PreFooterFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        PreFooterElements[2].animate({
+          transform: "translateY(" + (0.08 * (PreFooterFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        PreFooterElements[3].animate({
+          transform: "translateY(" + (0.15 * (PreFooterFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+        PreFooterElements[4].animate({
+          transform: "translateY(" + (0.22 * (PreFooterFromTop - scroll)) + "px )"
+        }, { duration: 1500, fill: "forwards" });
+
+    }
+  
   });
 
 
@@ -829,7 +849,6 @@ window.addEventListener('load', buildGallerySlides);*/
         s.frame.style.transform = `scale(${frameScale})`;
         if (frameScale >= 1) {
           document.querySelector(".overlay").classList.add('overlay-text-active');
-          console.log(scroll)
         }
         // Video: apply curve to change pace
         const pv = Math.pow(p, s.vCurve); // <1 = faster at start, >1 = slower at start
@@ -896,10 +915,74 @@ window.addEventListener('load', buildGallerySlides);*/
 
 
  
-document.querySelector(".han-menu-full").addEventListener("click", function(){
-  document.querySelector(".menu-full").classList.toggle("menu-active");
- });
+document.querySelector(".han-menu-full").addEventListener("click", function() {
+  const menu = document.querySelector(".menu-full");
+  const isActive = menu.classList.toggle("menu-active");
+
+  if (isActive) {
+    // Disable Lenis scrolling
+    lenis.stop();
+  } else {
+    // Re-enable Lenis scrolling
+    lenis.start();
+  }
+});
  
+
+function id(v) { return document.getElementById(v); }
+
+function loadbar() {
+  let ovrl = id("overlay"),
+      prog = id("progress"),
+      stat = id("progstat"),
+      ovIn = id("overlay-in"), 
+      ovInh = document.querySelector("#overlay-in h1");
+
+  let duration = 5000; // 5 seconds total to reach 100%
+  let start = null;
+
+  function animate(timestamp) {
+    if (!start) start = timestamp;
+    let progress = Math.min((timestamp - start) / duration, 1);
+    let perc = Math.floor(progress * 100) + "%";
+
+    // Update visual progress
+    prog.style.width = perc;
+    stat.innerHTML = perc;
+
+    // Positioning animations
+    if (window.innerWidth <= 600) {
+      ovIn.style.bottom = progress * 50 + "%";
+    } else {
+      ovIn.style.bottom = progress * 30 + "%";
+    }
+
+    ovInh.style.transform = "translateY(calc(100% - " + (progress * 50) + "%))";
+
+    // Continue until we hit 100%
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      // Pause for 1s before finishing
+      setTimeout(doneLoading, 750);
+    }
+  }
+
+  function doneLoading() {
+
+    header.classList.add('header-loaded');
+    nav.classList.add('nav-loaded');
+    setTimeout(function () {
+      ovrl.style.display = "none";
+      ovrl.style.opacity = 0;
+    }, 2000);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+document.addEventListener('DOMContentLoaded', loadbar, false);
+
 
 
 })();

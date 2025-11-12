@@ -682,6 +682,7 @@ color: white;
   .reveal-image::before { transform: translateX(110%) rotate(0deg); }
   .reveal-image img { transform: none; }
 }
+
 .none{
   display: none;
 }
@@ -785,8 +786,11 @@ overflow: hidden;
         flex-direction: column;
         z-index: 10;
         transition:  0.5s ease-in-out;
-        opacity: 98%;
+        opacity: 0;
     }
+    .nav-loaded{
+  opacity: 1;
+}
     .menu-div::-webkit-scrollbar {
         display: none; /* for Chrome, Safari, and Opera */
       }
@@ -851,8 +855,6 @@ overflow: hidden;
         }
     }
     .menu-div{
-        -ms-overflow-style: none; 
-  scrollbar-width: none;
         overflow: scroll;
     height: 0;
       transition:700ms cubic-bezier(.215,.61,.355,1);;
@@ -982,7 +984,7 @@ overflow: hidden;
 }
     .menu-active{
             background: rgba(1, 49, 170, 0.0) !important;
-            backdrop-filter: blur(300px) !important;
+            backdrop-filter: blur(300px) saturate(1) !important;
             opacity: 100%;
         
           
@@ -1066,7 +1068,6 @@ header video, header img {
 }
 
 .header-text {
-  padding-top: 2vw;
   transition-duration: 1s;
   transition-delay: 0.7s;
   transition-property: opacity, padding-top, height;

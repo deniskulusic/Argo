@@ -5,6 +5,7 @@
   z-index: 1;
   position: relative;
   padding-top: 0;
+  background-color: transparent;
 }
 header {
   height: 100dvh;
@@ -12,7 +13,7 @@ header {
   align-items: center;
   position: relative;
   z-index: 1;
-  background-color: rgb(6, 24, 52);
+  background-color: transparent;
 
 }
 header video, header img {
@@ -333,7 +334,6 @@ position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #132b5183;
   backdrop-filter: blur(20px) saturate(2);
   color: #000000;
   z-index: 1000;
@@ -2316,3 +2316,101 @@ z-index: 2;
     z-index: 3;
     background-color: transparent;
   }
+
+/*Pre footer*/
+.pre-footer{
+  overflow: hidden;
+  h2{
+    text-transform: uppercase;
+    grid-column: span 12;
+  }
+}
+.image {
+  background-color: #000;
+  background-color: black;
+  border-radius: 0;
+  border-radius: 0px;
+  display: block;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+  .image.--2 {
+  height: 39.167vw;
+  margin: 0 .417vw;
+  width: 29.167vw;
+}
+.image.--0, .image.--4 {
+  border: 10px solid #fff;
+  border: 10px solid white;
+  height: 25vw;
+  width: 20vw;
+}
+ .image.--1, .image.--3 {
+  height: 35vw;
+  width: 25vw;
+}
+.image.--0 {
+  left: 5vw;
+  z-index: 2;
+}
+.image-group {
+  align-items: center;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  left: -10vw;
+  position: relative;
+  width: 120vw;
+  overflow: hidden;
+  margin-top: 80px;
+}
+.image.--4 {
+  left: -5vw;
+  z-index: 1;
+}
+
+
+#overlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #1A1E25;
+  transition: 1s 1s;
+  height: 100dvh;
+  width: 100vw;
+}
+
+#overlay-in {
+  position: absolute;
+  left: 5%;
+  bottom: 0;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  transition: 1s;
+}
+#overlay-in h1 {
+  width: 58vw;
+  transform: translateY(100%);
+  transition: 1s;
+  color: white;
+}
+
+#progress {
+  height: 1vw;
+  background: #fff;
+  width: 0;
+  transition: 1s;
+}
+
+#progstat {
+  width: 100%;
+  font-size: 15vw;
+  color: #fff;
+  transition: 1s;
+}
