@@ -125,7 +125,8 @@
   font-style: italic;
   font-display: swap;
 }
-.booking-div-right-1, .booking-div-right-2 {
+.booking-div-right-1,
+.booking-div-right-2 {
   font-family: "TT Norms Pro Expanded";
 }
 
@@ -694,6 +695,10 @@ p {
   flex-direction: column;
   gap: 8px;
 }
+.menu-div-left-2 a::before,
+.menu-div-left-2 a::after {
+  display: none;
+}
 
 .menu-div-secondary {
   font-size: 12px;
@@ -771,7 +776,8 @@ p {
   opacity: 1;
   transition: 0.3s;
 }
-.menu-socials a::before, .menu-socials a::after {
+.menu-socials a::before,
+.menu-socials a::after {
   display: none;
 }
 .menu-socials a:hover img {

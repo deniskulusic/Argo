@@ -141,12 +141,16 @@
   font-style: italic;
   font-display: swap;
 }
-.booking-div-right-1 , .booking-div-right-2  {
-font-family: 'TT Norms Pro Expanded';
+
+.booking-div-right-1,
+.booking-div-right-2 {
+  font-family: 'TT Norms Pro Expanded';
 }
-body.preloader-active{
+
+body.preloader-active {
   overflow: hidden;
 }
+
 /*Basic*/
 * {
   box-sizing: border-box;
@@ -761,13 +765,14 @@ p {
   flex-direction: column;
   gap: 38px;
   grid-column: span 7;
-  a{
-  font-weight: 900;
-  font-size: 60px;
-  line-height: 70px;
-  letter-spacing: 2.13px;
-  vertical-align: middle;
-  color: white;
+
+  a {
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 70px;
+    letter-spacing: 2.13px;
+    vertical-align: middle;
+    color: white;
   }
 }
 
@@ -775,6 +780,11 @@ p {
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  a::before,
+  a::after {
+    display: none;
+  }
 }
 
 .menu-div-secondary {
@@ -788,17 +798,14 @@ p {
   .lng {
     color: rgb(55, 55, 55);
   }
-
-
-
   .lngactive {
     color: #1B1E2B;
   }
 }
-.inverted .menu-div-left-1 {
 
-  a{
-  color: #1B1E2B;
+.inverted .menu-div-left-1 {
+  a {
+    color: #1B1E2B;
   }
 }
 
@@ -810,8 +817,9 @@ p {
   opacity: .8;
   transition: .3s;
 }
-.lngo a::before{
-  display: none ;
+
+.lngo a::before {
+  display: none;
 }
 
 .lngo:hover {
@@ -861,7 +869,9 @@ p {
     }
 
   }
-  a::before , a::after{
+
+  a::before,
+  a::after {
     display: none;
   }
 
@@ -1065,26 +1075,29 @@ footer {
   margin-top: 140px;
 
   h3 {
-  grid-column: span 5;
-  font-size: 38px;
-  color: white;
-  text-align: start;
-  color: #1A1E25;
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
+    grid-column: span 5;
+    font-size: 38px;
+    color: white;
+    text-align: start;
+    color: #1A1E25;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
 
 }
-.footer-top-1{
+
+.footer-top-1 {
   grid-column: span 4;
 }
-.footer-top{
+
+.footer-top {
 
   border-bottom: 1px solid #1A1E25;
   padding-bottom: 48px;
-.maxw{
-  align-items: center;
-}
+
+  .maxw {
+    align-items: center;
+  }
 }
 
 .footer-line {
@@ -1097,8 +1110,8 @@ footer {
 .sign-up {
   display: flex;
   padding: 16px 20px;
-    padding-right: 20px;
-    padding-left: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   padding-right: 60px;
   border-bottom: 1px solid black;
   grid-column: 8/span 5;
@@ -1110,20 +1123,20 @@ footer {
 
   input {
     border: 0;
-  font-size: 20px;
-  color: black;
-  background-color: transparent;
-  width: 100%;
-}
-  
+    font-size: 20px;
+    color: black;
+    background-color: transparent;
+    width: 100%;
+  }
+
 
   input:focus {
     outline: none;
   }
 
   .sign-up input::placeholder {
-  color: #0000009c;
-}
+    color: #0000009c;
+  }
 }
 
 .line {
@@ -1182,10 +1195,12 @@ footer {
     margin-bottom: 30px;
     opacity: .7;
   }
-  p.p-footer-active{
+
+  p.p-footer-active {
     opacity: 1;
   }
-  p:hover{
+
+  p:hover {
     opacity: 1;
   }
 }
@@ -1197,35 +1212,40 @@ footer {
     width: 80%;
   }
 }
-.footer-bottom{
-  a{
-      opacity: .6;
-      font-size: 15px;
-      color: #1A1E25;
-      transition: .3s;
-      img{
-        opacity: 1 !important;
-      }
+
+.footer-bottom {
+  a {
+    opacity: .6;
+    font-size: 15px;
+    color: #1A1E25;
+    transition: .3s;
+
+    img {
+      opacity: 1 !important;
     }
-      a:hover{
-      opacity:1;
-    
   }
-  .menu-socials {
-    img{
-  filter: brightness(0%);
-    }
-    
-width: auto;
-  background-color: transparent;
+
+  a:hover {
+    opacity: 1;
 
   }
-  div{
+
+  .menu-socials {
+    img {
+      filter: brightness(0%);
+    }
+
+    width: auto;
+    background-color: transparent;
+
+  }
+
+  div {
     color: #1A1E25;
     opacity: .6;
   }
-  
-  
+
+
 }
 
 .footer-socials {
@@ -1272,9 +1292,11 @@ width: auto;
   margin-bottom: 55px;
   color: white;
 }
-.footer-text.footer-text-active{
+
+.footer-text.footer-text-active {
   opacity: 1;
 }
+
 .footer-text {
   color: #1A1E25;
   opacity: .6;
@@ -1325,7 +1347,8 @@ width: auto;
   color: #1A1E25;
   font-family: 'TT Norms Pro Expanded';
 }
-.footer-element-last-1{
+
+.footer-element-last-1 {
   opacity: .6;
 }
 
