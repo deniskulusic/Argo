@@ -1,4 +1,6 @@
 (function () {
+  window.history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // If user prefers reduced motion, skip Lenis entirely (accessibility first)
@@ -205,9 +207,11 @@ window.addEventListener("resize", function () {
   lenis.on('scroll', ({ scroll }) => {
     if(scroll > WindowHeight - 100){
       document.querySelector(".menu-full").classList.add("menu-filled")
+      document.querySelector(".menu-full").classList.add("inverted")
     }
     else{
       document.querySelector(".menu-full").classList.remove("menu-filled")
+      document.querySelector(".menu-full").classList.remove("inverted")
     }
 
 
@@ -235,14 +239,14 @@ window.addEventListener("resize", function () {
 
     document.querySelectorAll('[data-lenis-speed]').forEach((el) => {
       const speed = parseFloat(el.dataset.lenisSpeed) || 0;
-      if(scroll < 1.5*WindowHeight)
+       if(scroll < 1.5*WindowHeight)
       el.style.transform = `translate3d(0, ${scroll * speed * SCALE}px, 0)`;
 
       
   
     
     });
-
+/*
     if (Section6.getBoundingClientRect().top - 1.5*WindowHeight < 0 && Section6.getBoundingClientRect().top + Section6.clientHeight + 0.5*WindowHeight  > 0) {
         Section6Elements[0].animate({
           transform: "translateY(" + (0.08 * (Section6ImgsFromTop - scroll)) + "px )"
@@ -255,7 +259,7 @@ window.addEventListener("resize", function () {
         }, { duration: 1500, fill: "forwards" });
         
     }
-
+*/
 
   
     if (SectionArgo2.getBoundingClientRect().top - WindowHeight < 0 && SectionArgo2.getBoundingClientRect().top + SectionArgo2.clientHeight > 0) {
@@ -289,7 +293,27 @@ window.addEventListener("resize", function () {
 
 
 
+          const acordation=document.getElementsByClassName('faq');
+for(i=0;i<acordation.length;i++){
+  
+    acordation[i].addEventListener('click',function(){
+      var faqa=this.classList.contains("active");
+        var elems = document.querySelectorAll(".faq.active");
+        setTimeout(() => lenis.resize(), 550);
+        
+        
+[].forEach.call(elems, function(el) {
+    el.classList.remove("active");
+});
 
+if(faqa) {
+  this.classList.remove("active");
+        }
+        else{
+          this.classList.add("active");
+        }
+    })
+}
 
 
 
@@ -791,125 +815,110 @@ window.addEventListener('load', buildGallerySlides);*/
 
 /*GROW SECTION*/
 
+const growSections = Array.from(document.querySelectorAll('.grow-section'));
+if (growSections.length) {
+  const toPx = (val) => {
+    if (typeof val !== 'string') return Number(val) || 0;
+    if (val.endsWith('vh')) return (parseFloat(val) / 100) * window.innerHeight;
+    if (val.endsWith('vw')) return (parseFloat(val) / 100) * window.innerWidth;
+    if (val.endsWith('px')) return parseFloat(val);
+    return parseFloat(val) || 0;
+  };
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const lerp  = (a, b, t) => a + (b - a) * t;
 
+  const state = growSections.map((section) => {
+    const pin   = section.querySelector('.pin');
+    const frame = section.querySelector('.frame');
+    const video = frame ? frame.querySelector('img') : null;
 
+    // Frame (container) scale range
+    const startScale = parseFloat(section.dataset.growStart || 0.7);
+    const endScale   = parseFloat(section.dataset.growEnd   || 1.0);
 
-  const growSections = Array.from(document.querySelectorAll('.grow-section'));
-  if (growSections.length) {
-    const toPx = (val) => {
-      if (typeof val !== 'string') return Number(val) || 0;
-      if (val.endsWith('vh')) return (parseFloat(val) / 100) * window.innerHeight;
-      if (val.endsWith('vw')) return (parseFloat(val) / 100) * window.innerWidth;
-      if (val.endsWith('px')) return parseFloat(val);
-      return parseFloat(val) || 0;
-    };
-    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-    const lerp  = (a, b, t) => a + (b - a) * t;
+    // Video: its own range + a curve exponent to change the pace
+    const vStart = parseFloat(section.dataset.videoStart ?? startScale);
+    const vEnd   = parseFloat(section.dataset.videoEnd   ?? endScale);
+    const vCurve = parseFloat(section.dataset.videoCurve || 1); // 1=linear, <1 ease-out, >1 ease-in
 
-    const state = growSections.map((section) => {
-      const pin   = section.querySelector('.pin');
-      const frame = section.querySelector('.frame');
-      const video = frame ? frame.querySelector('img') : null;
+    const distStr = section.dataset.growDistance
+      || getComputedStyle(section).getPropertyValue('--grow-distance')
+      || '120vh';
+    let growDistance = toPx(distStr);
 
-      // Frame (container) scale range
-      const startScale = parseFloat(section.dataset.growStart || 0.7);
-      const endScale   = parseFloat(section.dataset.growEnd   || 1.0);
+    // Extra hold after reaching full scale (defaults to 10vh)
+    const holdStr = section.dataset.growHold || '20vh';
+    let holdPx = toPx(holdStr);
 
-      // Video: its own range + a curve exponent to change the pace
-      const vStart = parseFloat(section.dataset.videoStart ?? startScale);
-      const vEnd   = parseFloat(section.dataset.videoEnd   ?? endScale);
-      const vCurve = parseFloat(section.dataset.videoCurve || 1); // 1=linear, <1 ease-out, >1 ease-in
+    // Sync section height (pin duration) — include hold
+    section.style.setProperty('--grow-distance', `${growDistance}px`);
+    section.style.setProperty('--grow-hold', `${holdPx}px`);
+    section.style.height = `calc(100vh + ${growDistance}px + ${holdPx}px)`;
 
-      const distStr = section.dataset.growDistance
-        || getComputedStyle(section).getPropertyValue('--grow-distance')
-        || '120vh';
-      let growDistance = toPx(distStr);
+    // Initial transforms (in case CSS didn’t set them)
+    if (frame && !frame.style.transform) frame.style.transform = `scale(${startScale})`;
+    if (video && !video.style.transform) video.style.transform = `scale(${vStart})`;
 
-      // Sync section height (pin duration)
-      section.style.setProperty('--grow-distance', `${growDistance}px`);
-      section.style.height = `calc(100vh + ${growDistance}px)`;
+    return { section, pin, frame, video, startScale, endScale, vStart, vEnd, vCurve, growDistance, holdPx, holdStr };
+  });
 
-      // Initial transforms (in case CSS didn’t set them)
-      if (frame && !frame.style.transform) frame.style.transform = `scale(${startScale})`;
-      if (video && !video.style.transform) video.style.transform = `scale(${vStart})`;
+  function updateGrow() {
+    state.forEach((s) => {
+      if (!s.section || !s.frame) return;
+      const rect = s.section.getBoundingClientRect();
 
-      return { section, pin, frame, video, startScale, endScale, vStart, vEnd, vCurve, growDistance };
+      // Use growDistance + holdPx as the effective pinned distance so the section
+      // remains pinned (and at scale 1) for an extra holdPx of scroll.
+      const effectiveDistance = s.growDistance + s.holdPx;
+
+       // Base progress for the animation (0..1)
+      // This should complete over growDistance, before the hold.
+      const p = clamp((-rect.top) / s.growDistance, 0, 1);
+
+      // Frame: linear
+      const frameScale = lerp(s.startScale, s.endScale, p);
+      s.frame.style.transform = `scale(${frameScale})`;
+
+      // When it reaches full scale (or beyond) we can toggle any UI hooks
+      if (frameScale >= 1) {
+        const overlay = document.querySelector(".overlay");
+        if (overlay) overlay.classList.add('overlay-text-active');
+
+        const frameEl = document.querySelector(".frame");
+        if (frameEl) frameEl.setAttribute("data-lenis-speed", "8");
+      }
+
+      // Video: apply curve to change pace
+      const pv = Math.pow(p, s.vCurve); // <1 = faster at start, >1 = slower at start
+      const videoScale = lerp(s.vStart, s.vEnd, clamp(pv, 0, 1));
+      if (s.video) s.video.style.transform = `scale(${videoScale})`;
     });
+  }
 
-    function updateGrow() {
-      state.forEach((s) => {
-        if (!s.section || !s.frame) return;
-        const rect = s.section.getBoundingClientRect();
+  function recomputeDistances() {
+    state.forEach((s) => {
+      const distStr = s.section.dataset.growDistance
+        || getComputedStyle(s.section).getPropertyValue('--grow-distance')
+        || '120vh';
+      s.growDistance = toPx(distStr);
 
-        // Base progress while pinned
-        const p = clamp((-rect.top) / s.growDistance, 0, 1);
+      // Recompute hold (in case CSS or dataset changed)
+      const holdStr = s.section.dataset.growHold || s.holdStr || '10vh';
+      s.holdPx = toPx(holdStr);
 
-        // Frame: linear
-        const frameScale = lerp(s.startScale, s.endScale, p);
-        s.frame.style.transform = `scale(${frameScale})`;
-        if (frameScale >= 1) {
-          document.querySelector(".overlay").classList.add('overlay-text-active');
-        }
-        // Video: apply curve to change pace
-        const pv = Math.pow(p, s.vCurve); // <1 = faster at start, >1 = slower at start
-        const videoScale = lerp(s.vStart, s.vEnd, clamp(pv, 0, 1));
-        if (s.video) s.video.style.transform = `scale(${videoScale})`;
-      });
-    }
-
-    function recomputeDistances() {
-      state.forEach((s) => {
-        const distStr = s.section.dataset.growDistance
-          || getComputedStyle(s.section).getPropertyValue('--grow-distance')
-          || '120vh';
-        s.growDistance = toPx(distStr);
-        s.section.style.setProperty('--grow-distance', `${s.growDistance}px`);
-        s.section.style.height = `calc(100vh + ${s.growDistance}px)`;
-      });
-      updateGrow();
-    }
-
-    // Hook into Lenis + resize
-    if (window.__lenis) window.__lenis.on('scroll', updateGrow);
-    window.addEventListener('resize', recomputeDistances);
+      s.section.style.setProperty('--grow-distance', `${s.growDistance}px`);
+      s.section.style.setProperty('--grow-hold', `${s.holdPx}px`);
+      s.section.style.height = `calc(100vh + ${s.growDistance}px + ${s.holdPx}px)`;
+    });
     updateGrow();
   }
 
+  // Hook into Lenis + resize
+  if (window.__lenis) window.__lenis.on('scroll', updateGrow);
+  window.addEventListener('resize', recomputeDistances);
+  updateGrow();
+}
 
-    if (!menu) return;
-
-    let threshold = window.innerHeight; // 100vh
-    const getY = () =>
-      (window.__lenis && typeof window.__lenis.scroll === 'number')
-        ? window.__lenis.scroll
-        : (window.scrollY || document.documentElement.scrollTop || 0);
-
-    const apply = () => {
-      const y = getY();
-      if (y >= threshold) {
-        menu.classList.add('inverted');
-      } else {
-        menu.classList.remove('inverted');
-      }
-    };
-
-    // Keep threshold in sync with viewport changes
-    const onResize = () => {
-      threshold = window.innerHeight;
-      apply();
-    };
-    window.addEventListener('resize', onResize, { passive: true });
-
-    // Hook into Lenis if available; otherwise fall back to native scroll
-    if (window.__lenis && typeof window.__lenis.on === 'function') {
-      window.__lenis.on('scroll', apply);
-    } else {
-      window.addEventListener('scroll', apply, { passive: true });
-    }
-
-    // Run once on load
-    apply();
- 
 /*END OF GROW SECTION*/
 
 
@@ -936,9 +945,9 @@ function loadbar() {
       prog = id("progress"),
       stat = id("progstat"),
       ovIn = id("overlay-in"), 
-      ovInh = document.querySelector("#overlay-in h1");
+      ovInh = document.querySelector("#overlay-in span");
 
-  let duration = 5000; // 5 seconds total to reach 100%
+  let duration = 2000; // 5 seconds total to reach 100%
   let start = null;
 
   function animate(timestamp) {
@@ -949,7 +958,7 @@ function loadbar() {
     // Update visual progress
     prog.style.width = perc;
     stat.innerHTML = perc;
-
+lenis.stop();
     // Positioning animations
     if (window.innerWidth <= 600) {
       ovIn.style.bottom = progress * 50 + "%";
@@ -958,6 +967,7 @@ function loadbar() {
     }
 
     ovInh.style.transform = "translateY(calc(100% - " + (progress * 50) + "%))";
+ document.body.classList.add("preloader-active");
 
     // Continue until we hit 100%
     if (progress < 1) {
@@ -969,7 +979,8 @@ function loadbar() {
   }
 
   function doneLoading() {
-
+ document.body.classList.remove("preloader-active");
+    lenis.start();
     header.classList.add('header-loaded');
     nav.classList.add('nav-loaded');
     setTimeout(function () {

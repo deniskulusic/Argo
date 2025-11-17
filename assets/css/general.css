@@ -1,194 +1,5 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Black.woff2") format("woff2"), url("../fonts/Molde-Expanded-Black.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Light.woff2") format("woff2"), url("../fonts/Molde-Expanded-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Reverse";
-  src: url("../fonts/Molde-Expanded-RegularReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-RegularReverse.woff") format("woff");
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-RegularItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-RegularItalic.woff") format("woff");
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-BlackItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-BlackItalic.woff") format("woff");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-BoldItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-BoldItalic.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Heavy Reverse";
-  src: url("../fonts/Molde-Expanded-HeavyReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-HeavyReverse.woff") format("woff");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Bold.woff2") format("woff2"), url("../fonts/Molde-Expanded-Bold.woff") format("woff");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Heavy.woff2") format("woff2"), url("../fonts/Molde-Expanded-Heavy.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Light Reverse";
-  src: url("../fonts/Molde-Expanded-LightReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-LightReverse.woff") format("woff");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-HeavyItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-HeavyItalic.woff") format("woff");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Black Reverse";
-  src: url("../fonts/Molde-Expanded-BlackReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-BlackReverse.woff") format("woff");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Medium.woff2") format("woff2"), url("../fonts/Molde-Expanded-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Bold Reverse";
-  src: url("../fonts/Molde-Expanded-BoldReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-BoldReverse.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-LightItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-LightItalic.woff") format("woff");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Medium Reverse";
-  src: url("../fonts/Molde-Expanded-MediumReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-MediumReverse.woff") format("woff");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-SemiboldItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-SemiboldItalic.woff") format("woff");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-MediumItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-MediumItalic.woff") format("woff");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-UltralightItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-UltralightItalic.woff") format("woff");
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Ultralight Reverse";
-  src: url("../fonts/Molde-Expanded-UltralightReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-UltralightReverse.woff") format("woff");
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Semibold Reverse";
-  src: url("../fonts/Molde-Expanded-SemiboldReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-SemiboldReverse.woff") format("woff");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Regular.woff2") format("woff2"), url("../fonts/Molde-Expanded-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Semibold.woff2") format("woff2"), url("../fonts/Molde-Expanded-Semibold.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded Thin Reverse";
-  src: url("../fonts/Molde-Expanded-ThinReverse.woff2") format("woff2"), url("../fonts/Molde-Expanded-ThinReverse.woff") format("woff");
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Ultralight.woff2") format("woff2"), url("../fonts/Molde-Expanded-Ultralight.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-ThinItalic.woff2") format("woff2"), url("../fonts/Molde-Expanded-ThinItalic.woff") format("woff");
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Molde Expanded";
-  src: url("../fonts/Molde-Expanded-Thin.woff2") format("woff2"), url("../fonts/Molde-Expanded-Thin.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "TT Norms Pro Expanded";
   src: url("../fonts/TTNormsProExpanded-Thin.otf") format("opentype");
   font-weight: 100;
@@ -314,12 +125,21 @@
   font-style: italic;
   font-display: swap;
 }
+.booking-div-right-1, .booking-div-right-2 {
+  font-family: "TT Norms Pro Expanded";
+}
+
+body.preloader-active {
+  overflow: hidden;
+}
+
 /*Basic*/
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: "Molde Expanded", sans-serif;
+  font-family: "aviano-sans", sans-serif;
   font-weight: 400;
+  color: #1B1E2B;
 }
 
 .cursor {
@@ -345,7 +165,8 @@
   transform: translate3d(0, 0, 0);
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -366,11 +187,12 @@ main {
 }
 
 /* Reduced motion accessibility: if the user prefers reduced motion,
-   we’ll disable Lenis in JS and let the browser handle scrolling. */
+       we’ll disable Lenis in JS and let the browser handle scrolling. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: smooth;
-  } /* gentle fallback */
+  }
+  /* gentle fallback */
 }
 body {
   background-color: white;
@@ -441,8 +263,8 @@ section {
 
 /*Typography*/
 h1 {
-  font-family: "Molde Expanded", sans-serif;
-  font-weight: 600;
+  font-family: "aviano-sans", sans-serif;
+  font-weight: 900;
   font-size: 60px;
   line-height: 70px;
   letter-spacing: 2.13px;
@@ -450,15 +272,15 @@ h1 {
 }
 
 h2 {
-  font-family: "Molde Expanded", sans-serif;
-  font-weight: 500;
+  font-family: "aviano-sans", sans-serif;
+  font-weight: 900;
   font-size: 40px;
   line-height: 44px;
   vertical-align: middle;
 }
 
 h3 {
-  font-family: "Molde Expanded", sans-serif;
+  font-family: "aviano-sans", sans-serif;
   font-weight: 500;
   font-style: Medium;
   font-size: 32px;
@@ -469,7 +291,7 @@ h3 {
 }
 
 h4 {
-  font-family: "Molde Expanded", sans-serif;
+  font-family: "aviano-sans", sans-serif;
   font-size: 22px;
   font-weight: 300;
   letter-spacing: 1px;
@@ -478,17 +300,17 @@ h4 {
 }
 
 h5 {
-  font-family: "Molde Expanded", sans-serif;
+  font-family: "aviano-sans", sans-serif;
   font-weight: 600;
-  font-style: Black;
+  font-style: #1B1E2B;
   font-size: 16px;
-  line-height: 164%;
-  letter-spacing: 20.5%;
+  line-height: inherit;
+  letter-spacing: 2%;
   text-align: center;
 }
 
 h6 {
-  font-family: "Molde Expanded", sans-serif;
+  font-family: "aviano-sans", sans-serif;
   font-weight: 400;
   font-size: 40px;
   line-height: 40px;
@@ -504,7 +326,7 @@ p {
 }
 
 .click-underline {
-  font-family: "Molde Expanded", sans-serif;
+  font-family: "aviano-sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 32px;
@@ -531,8 +353,8 @@ p {
 }
 
 .main-button {
-  padding: 14px 34px;
-  font-size: 20px;
+  padding: 14px 54px;
+  font-size: 16px;
   border: 1px solid white;
   color: white;
   transition: 0.3s;
@@ -595,21 +417,26 @@ p {
 .reveal-image {
   position: relative;
   overflow: hidden;
-  transform: translateY(40px); /* start below */
-  opacity: 0; /* start invisible */
+  transform: translateY(40px);
+  /* start below */
+  opacity: 0;
+  /* start invisible */
   transition: transform 1000ms cubic-bezier(0.215, 0.61, 0.355, 1), opacity 1000ms cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform, opacity;
 }
 
 /* Animate when in view */
 .reveal-image.is-inview {
-  transform: translateY(0); /* final position */
-  opacity: 1; /* fade in */
+  transform: translateY(0);
+  /* final position */
+  opacity: 1;
+  /* fade in */
 }
 
 /* Optional: smooth scaling on the image (if you still want it) */
 .reveal-image picture {
-  transform: scale(1.1); /* slight zoom to add depth */
+  transform: scale(1.1);
+  /* slight zoom to add depth */
   transition: transform 1500ms cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;
 }
@@ -644,8 +471,6 @@ p {
   border: 1px solid white;
   color: white;
   margin-right: 64px;
-  padding: 14px 34px;
-  font-size: 18px;
 }
 
 .button-header:hover {
@@ -693,7 +518,8 @@ p {
   transition: all 0.5s ease-in-out;
 }
 
-.han-burger::before, .han-burger::after {
+.han-burger::before,
+.han-burger::after {
   margin-left: 0 !important;
   position: absolute;
   content: "";
@@ -717,7 +543,6 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Clash Display", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -753,7 +578,8 @@ p {
 }
 
 .menu-div::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
+  display: none;
+  /* for Chrome, Safari, and Opera */
 }
 
 .nonemenu {
@@ -829,13 +655,12 @@ p {
   justify-content: center;
   width: 100%;
 }
-.menu-div-left h1 {
-  color: white;
+.menu-div-left a {
   position: relative;
   width: -moz-fit-content;
   width: fit-content;
 }
-.menu-div-left h1::before {
+.menu-div-left a::before {
   content: "";
   bottom: -4px;
   left: 0;
@@ -845,7 +670,7 @@ p {
   width: 0px;
   transition: 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-.menu-div-left h1:hover::before {
+.menu-div-left a:hover::before {
   width: 100%;
 }
 
@@ -854,6 +679,14 @@ p {
   flex-direction: column;
   gap: 38px;
   grid-column: span 7;
+}
+.menu-div-left-1 a {
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 70px;
+  letter-spacing: 2.13px;
+  vertical-align: middle;
+  color: white;
 }
 
 .menu-div-left-2 {
@@ -873,7 +706,11 @@ p {
   color: rgb(55, 55, 55);
 }
 .inverted .lngactive {
-  color: black;
+  color: #1B1E2B;
+}
+
+.inverted .menu-div-left-1 a {
+  color: #1B1E2B;
 }
 
 .lngo {
@@ -883,6 +720,10 @@ p {
   position: relative;
   opacity: 0.8;
   transition: 0.3s;
+}
+
+.lngo a::before {
+  display: none;
 }
 
 .lngo:hover {
@@ -930,6 +771,9 @@ p {
   opacity: 1;
   transition: 0.3s;
 }
+.menu-socials a::before, .menu-socials a::after {
+  display: none;
+}
 .menu-socials a:hover img {
   opacity: 0.7;
 }
@@ -951,10 +795,10 @@ p {
   background-color: transparent !important;
 }
 .menu-active .han-burger::before {
-  transform: rotate(45deg) translate(35px, -35px);
+  transform: rotate(25deg) translate(46px, -22px);
 }
 .menu-active .han-burger::after {
-  transform: rotate(-45deg) translate(35px, 35px);
+  transform: rotate(-25deg) translate(46px, 21px);
 }
 
 /*Hero*/
@@ -973,7 +817,8 @@ header {
   background-color: rgb(6, 24, 52);
 }
 
-header video, header img {
+header video,
+header img {
   z-index: 1;
   position: absolute;
   left: 0;
@@ -992,7 +837,7 @@ header video, header img {
   height: 0%;
   width: 100%;
   transition: 0.9s;
-  background-color: #000;
+  background-color: #1B1E2B;
   opacity: 0.5;
   z-index: 2;
 }
@@ -1108,14 +953,30 @@ header video, header img {
   }
 }
 footer {
-  background-color: #132b51;
+  background-color: white;
   padding: 60px 0;
   margin-top: 140px;
 }
 footer h3 {
   grid-column: span 5;
+  font-size: 38px;
   color: white;
   text-align: start;
+  color: #1A1E25;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.footer-top-1 {
+  grid-column: span 4;
+}
+
+.footer-top {
+  border-bottom: 1px solid #1A1E25;
+  padding-bottom: 48px;
+}
+.footer-top .maxw {
+  align-items: center;
 }
 
 .footer-line {
@@ -1128,27 +989,32 @@ footer h3 {
 .sign-up {
   display: flex;
   padding: 16px 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   padding-right: 60px;
-  border: 1px solid white;
-  grid-column: span 3;
+  border-bottom: 1px solid black;
+  grid-column: 8/span 5;
   align-items: center;
   position: relative;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-left: 0px;
 }
 .sign-up input {
   border: 0;
-  font-size: 16px;
-  color: white;
+  font-size: 20px;
+  color: black;
   background-color: transparent;
   width: 100%;
 }
 .sign-up input:focus {
   outline: none;
 }
-.sign-up input::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.747);
+.sign-up .sign-up input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.6117647059);
 }
-.sign-up input::placeholder {
-  color: rgba(255, 255, 255, 0.747);
+.sign-up .sign-up input::placeholder {
+  color: rgba(0, 0, 0, 0.6117647059);
 }
 
 .line {
@@ -1190,7 +1056,7 @@ footer h3 {
 }
 
 .footer-element {
-  grid-column: span 2;
+  grid-column: span 3;
   padding: 90px 0;
   display: flex;
   flex-direction: column;
@@ -1200,9 +1066,16 @@ footer h3 {
   grid-column: span 2;
 }
 .footer-logo-element p {
-  color: rgb(142, 159, 172);
+  color: #1A1E25;
   margin-top: 25px;
   margin-bottom: 30px;
+  opacity: 0.7;
+}
+.footer-logo-element p.p-footer-active {
+  opacity: 1;
+}
+.footer-logo-element p:hover {
+  opacity: 1;
 }
 
 .footer-logo {
@@ -1210,6 +1083,30 @@ footer h3 {
 }
 .footer-logo img {
   width: 80%;
+}
+
+.footer-bottom a {
+  opacity: 0.6;
+  font-size: 15px;
+  color: #1A1E25;
+  transition: 0.3s;
+}
+.footer-bottom a img {
+  opacity: 1 !important;
+}
+.footer-bottom a:hover {
+  opacity: 1;
+}
+.footer-bottom .menu-socials {
+  width: auto;
+  background-color: transparent;
+}
+.footer-bottom .menu-socials img {
+  filter: brightness(0%);
+}
+.footer-bottom div {
+  color: #1A1E25;
+  opacity: 0.6;
 }
 
 .footer-socials {
@@ -1231,16 +1128,14 @@ footer h3 {
   height: 16px;
   opacity: 0.6;
   transition: 0.3s;
-}
-.footer-socials a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  filter: brightness(0%);
 }
 .footer-socials a:hover img {
   opacity: 1;
 }
 
 .footer-text-element {
-  grid-column: 4/span 2;
+  grid-column: 4/span 3;
 }
 
 .footer-title {
@@ -1250,29 +1145,35 @@ footer h3 {
   color: white;
 }
 
+.footer-text.footer-text-active {
+  opacity: 1;
+}
+
 .footer-text {
-  color: rgb(142, 159, 172);
-  font-size: 17px;
-  line-height: 25.5px;
+  color: #1A1E25;
+  opacity: 0.6;
+  font-size: 27px;
+  line-height: 30.5px;
   margin-bottom: 35px;
   align-items: end;
   justify-content: start;
   margin-left: -10px;
+  transition: 0.3s;
   transition: 0.3s;
 }
 .footer-text img {
   transform: translate3d(-100%, 100%, 0);
   transition: 0.3s;
   opacity: 0;
-  -webkit-filter: invert(100%);
+  filter: brightness(0%);
   box-sizing: content-box;
-  height: 10px;
-  width: 10px;
+  height: 16px;
+  width: 16px;
 }
 
 .footer-text:hover {
   margin-left: 0px;
-  color: white;
+  opacity: 1;
 }
 .footer-text:hover img {
   height: 10px;
@@ -1283,14 +1184,20 @@ footer h3 {
 }
 
 .footer-element-last {
-  gap: 25px;
+  gap: 8px;
   grid-column: span 3;
 }
 
 .footer-phone {
-  font-size: 30px;
-  font-weight: 500;
-  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #1A1E25;
+  font-family: "TT Norms Pro Expanded";
+}
+
+.footer-element-last-1 {
+  opacity: 0.6;
 }
 
 .footer-last {
@@ -1300,28 +1207,14 @@ footer h3 {
 }
 
 .footer-last:hover {
-  color: white;
+  color: #1A1E25;
 }
 
 .footer-bottom {
   grid-column: span 12;
-  height: 30px;
-  gap: 45px;
   display: flex;
   align-items: center;
-}
-.footer-bottom div {
-  width: 1px;
-  height: 100%;
-  background-color: rgb(142, 159, 172);
-}
-.footer-bottom a {
-  font-size: 17px;
-  color: rgb(142, 159, 172);
-  transition: 0.3s;
-}
-.footer-bottom a:hover {
-  color: white;
+  justify-content: space-between;
 }
 .footer-bottom img {
   filter: brightness(120%);
@@ -1342,41 +1235,42 @@ footer h3 {
   filter: brightness(0%);
 }
 .inverted .menu-text {
-  color: black;
+  color: #1B1E2B;
 }
-.inverted .han-burger::before, .inverted .han-burger::after {
-  background-color: black;
+.inverted .han-burger::before,
+.inverted .han-burger::after {
+  background-color: #1B1E2B;
 }
 .inverted .han-burger {
-  background-color: black;
+  background-color: #1B1E2B;
 }
 .inverted .main-button {
-  border: 1px solid black;
-  color: black;
+  border: 1px solid #1B1E2B;
+  color: #1B1E2B;
   background-color: transparent;
 }
 .inverted .main-button:hover {
-  background-color: black;
+  background-color: #1b1e2b;
   color: white;
 }
 .inverted .menu-div h1 {
   cursor: pointer;
-  color: black !important;
+  color: #1B1E2B !important;
 }
 .inverted .lngo {
-  color: black !important;
+  color: #1B1E2B !important;
 }
 .inverted .menu-div-secondary {
-  color: black;
+  color: #1B1E2B;
 }
 .inverted .menu-socials a img {
   filter: brightness(0%);
 }
-.inverted .menu-div-left h1::before {
-  background-color: black;
+.inverted .menu-div-left a::before {
+  background-color: #1B1E2B;
 }
 .inverted .lng .lngactive::before {
-  background-color: black;
+  background-color: #1B1E2B;
 }
 
 [data-scale] {
