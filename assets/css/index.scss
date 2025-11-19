@@ -1105,7 +1105,7 @@ header img {
     text-align: center;
   }
   h5{
-    font-size: 18px;
+    font-size: 20px;
   }
 
   p {
@@ -1807,13 +1807,13 @@ header img {
 
 .s-6-2 {
   margin-top: 140px;
-  transition-delay: .5s;
+  transition-delay: .3s;
   transition-duration: .7s;
 }
 
 .s-6-3 {
   margin-top: 140px;
-  transition-delay: 1s;
+  transition-delay: .6s;
   transition-duration: .7s;
 }
 
@@ -1825,6 +1825,7 @@ header img {
 /*Section 7*/
 .section-7 {
  // padding-top: 0;
+ padding-top: 260px;
 }
 
 .section-7-wrapper {
@@ -1873,8 +1874,7 @@ header img {
   .main-button {
     margin-left: 150px;
   }
-
-  .button-black {
+.button-black {
     color: #1B1E2B;
     border: 1px solid #1B1E2B;
     background-color: transparent;
@@ -1885,6 +1885,7 @@ header img {
     background-color: #1B1E2B;
     color: white;
   }
+  
 }
 
 .section-7-holder::after {
@@ -2616,7 +2617,7 @@ header img {
   z-index: 1;
 }
 
-
+/*
 #overlay {
   position: fixed;
   z-index: 1;
@@ -2665,6 +2666,57 @@ header img {
   font-size: 15vw;
   color: #fff;
   transition: 1s;
+}
+*/
+/* Overlay Background */
+/* Overlay Background */
+/* Overlay Background */
+#overlay {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-out, visibility 1s ease-out; /* specific transition for fade out */
+}
+
+/* Container for Logo and Ring */
+#loader-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Logo Image */
+#loader-logo {
+    width: 180px; /* Adjust size as needed */
+    height: auto;
+    opacity: 0; /* Hidden initially */
+    transition: opacity 0.3s ease-in; /* The 0.2s Fade In */
+}
+
+/* The SVG Ring Wrapper */
+.loader-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg); /* Rotate so drawing starts at top */
+    
+}
+
+/* The Actual Drawing Circle */
+.progress-ring-circle {
+    transition: stroke-dashoffset 1.2s cubic-bezier(.215, .61, .355, 1);
+    transform-origin: 50% 50%;
+    display: none;
 }
 
 /*Acordation*/

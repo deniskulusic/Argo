@@ -638,6 +638,13 @@ p {
   justify-content: baseline;
   display: flex;
   align-items: center;
+  overflow: auto; /* or scroll */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.menu-div::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 .menu-div-right {
@@ -963,6 +970,18 @@ footer {
   padding: 60px 0;
   margin-top: 140px;
 }
+footer .button-black {
+  color: #1B1E2B;
+  border: 1px solid #1B1E2B;
+  background-color: transparent;
+}
+footer .button-black:hover {
+  background-color: #1B1E2B;
+  color: white;
+}
+footer .button-black:hover svg {
+  filter: brightness(1000000%);
+}
 footer h3 {
   grid-column: span 5;
   font-size: 38px;
@@ -978,11 +997,30 @@ footer h3 {
 }
 
 .footer-top {
-  border-bottom: 1px solid #1A1E25;
   padding-bottom: 48px;
 }
 .footer-top .maxw {
   align-items: center;
+}
+
+.footer-line {
+  border-bottom: 1px solid #1A1E25;
+  grid-column: span 12;
+}
+
+footer .button-black-inverted {
+  background-color: #1A1E25;
+  color: white;
+}
+footer .button-black-inverted svg {
+  filter: brightness(100000%);
+}
+footer .button-black-inverted:hover {
+  background-color: white;
+  color: black;
+}
+footer .button-black-inverted:hover svg {
+  filter: brightness(0%);
 }
 
 .footer-line {
@@ -994,17 +1032,21 @@ footer h3 {
 
 .sign-up {
   display: flex;
-  padding: 16px 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-right: 60px;
-  border-bottom: 1px solid black;
+  gap: 20px;
   grid-column: 8/span 5;
   align-items: center;
   position: relative;
   height: -moz-fit-content;
   height: fit-content;
   padding-left: 0px;
+  justify-content: end;
+}
+.sign-up .button-black a {
+  display: flex;
+  align-items: center;
+}
+.sign-up .button-black svg {
+  margin-right: 8px;
 }
 .sign-up input {
   border: 0;

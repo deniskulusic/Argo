@@ -720,6 +720,12 @@ p {
   justify-content: baseline;
   display: flex;
   align-items: center;
+    overflow: auto;          /* or scroll */
+  scrollbar-width: none;   /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.menu-div::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 .menu-div-right {
@@ -1073,7 +1079,20 @@ footer {
   background-color: white;
   padding: 60px 0;
   margin-top: 140px;
+.button-black {
+    color: #1B1E2B;
+    border: 1px solid #1B1E2B;
+    background-color: transparent;
+  }
 
+  .button-black:hover {
+
+    background-color: #1B1E2B;
+    color: white;
+    svg{
+      filter: brightness(1000000%);
+    }
+  }
   h3 {
     grid-column: span 5;
     font-size: 38px;
@@ -1092,12 +1111,36 @@ footer {
 
 .footer-top {
 
-  border-bottom: 1px solid #1A1E25;
+
   padding-bottom: 48px;
 
   .maxw {
     align-items: center;
   }
+  
+}
+.footer-line{
+    border-bottom: 1px solid #1A1E25;
+    grid-column: span 12;
+
+}
+footer{
+
+
+.button-black-inverted{
+  background-color: #1A1E25;
+  color: white;
+  svg{
+    filter: brightness(100000%);
+  }
+}
+.button-black-inverted:hover{
+  background-color: white;
+  color: black;
+  svg{
+    filter: brightness(0%);
+  }
+}
 }
 
 .footer-line {
@@ -1109,17 +1152,22 @@ footer {
 
 .sign-up {
   display: flex;
-  padding: 16px 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-right: 60px;
-  border-bottom: 1px solid black;
+  gap: 20px;
   grid-column: 8/span 5;
   align-items: center;
   position: relative;
   height: fit-content;
   padding-left: 0px;
-
+  justify-content: end;
+  .button-black{
+    a{
+      display: flex;
+      align-items: center;
+    }
+    svg{
+      margin-right: 8px;
+    }
+  }
 
   input {
     border: 0;

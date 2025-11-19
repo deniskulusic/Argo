@@ -95,6 +95,7 @@
 
     </div>
   </div>
+  <!--
   <div id="overlay">
     <div id="overlay-in">
       <div id="progstat"></div>
@@ -102,6 +103,24 @@
       <span>OUR CREW IS <br> BOARDING</span>
     </div>
   </div>
+  -->
+  <div id="overlay">
+    <div id="loader-container">
+        <img src="assets/img/a.svg" id="loader-logo" alt="Logo">
+        
+        <svg class="loader-ring" width="600" height="600">
+            <circle 
+                class="progress-ring-circle"
+                stroke="#1A1E25"
+                stroke-width="20"
+                fill="transparent"
+                r="180"
+                cx="400"
+                cy="200"
+            />
+        </svg>
+    </div>
+</div>
   <main id="top">
     <section class="header header-2">
       <header data-lenis-speed="8">
@@ -474,12 +493,26 @@
         </div>
         
         <div class="sign-up">
-          <input type="text" placeholder="Your email address">
-          <div class="arrow-div">
-            <div class="line"></div>
-            <div class="arrow"></div>
 
-          </div>
+        <button class="main-button button-black button-black-inverted">
+                <a href="">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 7C3 6.46957 3.21071 5.96086 3.58579 5.58579C3.96086 5.21071 4.46957 5 5 5H19C19.5304 5 20.0391 5.21071 20.4142 5.58579C20.7893 5.96086 21 6.46957 21 7M3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7M3 7L12 13L21 7" stroke="#15243C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Send Inquiry
+                </a>
+              </button>
+              <button class="main-button button-black ">
+                <a href="">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 4H9L11 9L8.5 10.5C9.57096 12.6715 11.3285 14.429 13.5 15.5L15 13L20 15V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21C14.0993 20.763 10.4202 19.1065 7.65683 16.3432C4.8935 13.5798 3.23705 9.90074 3 6C3 5.46957 3.21071 4.96086 3.58579 4.58579C3.96086 4.21071 4.46957 4 5 4Z" stroke="#15243C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Call broker
+                </a>
+              </button>
+        </div>
+        <div class="footer-line">
+
         </div>
 
       </div>

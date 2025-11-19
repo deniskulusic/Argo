@@ -941,59 +941,68 @@ document.querySelector(".han-menu-full").addEventListener("click", function() {
 function id(v) { return document.getElementById(v); }
 
 function loadbar() {
-  let ovrl = id("overlay"),
-      prog = id("progress"),
-      stat = id("progstat"),
-      ovIn = id("overlay-in"), 
-      ovInh = document.querySelector("#overlay-in span");
+    // 1. Select Elements
+    let ovrl = document.getElementById("overlay"),
+        logo = document.getElementById("loader-logo"),
+        circle = document.querySelector('.progress-ring-circle');
 
-  let duration = 2000; // 5 seconds total to reach 100%
-  let start = null;
+    // 2. Setup Circle Math
+    // Radius is automatically read from HTML
+    let radius = circle.r.baseVal.value;
+    let circumference = radius * 2 * Math.PI;
 
-  function animate(timestamp) {
-    if (!start) start = timestamp;
-    let progress = Math.min((timestamp - start) / duration, 1);
-    let perc = Math.floor(progress * 100) + "%";
+    // Initialize the circle to be "empty" (hidden stroke)
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = circumference;
 
-    // Update visual progress
-    prog.style.width = perc;
-    stat.innerHTML = perc;
-lenis.stop();
-    // Positioning animations
-    if (window.innerWidth <= 600) {
-      ovIn.style.bottom = progress * 50 + "%";
-    } else {
-      ovIn.style.bottom = progress * 30 + "%";
+    // 3. Execution Start
+    if (typeof lenis !== 'undefined') lenis.stop();
+    document.body.classList.add("preloader-active");
+    
+    // Step A: Fade In Logo
+    // Short delay ensures the browser renders the opacity: 0 first
+    setTimeout(() => {
+        logo.style.opacity = 1;
+    }, 50);
+
+    // Step B: Start Circle Animation
+    setTimeout(() => {
+        // 1. Make sure it's visible (as per your code)
+        circle.style.display = "block";
+        
+        // 2. Force a reflow (Important!)
+        // This trick ensures the browser registers the "start" position 
+        // before we switch to the "end" position, enabling the transition.
+        void circle.clientWidth; 
+
+        // 3. Trigger the CSS transition
+        circle.style.strokeDashoffset = 0;
+    }, 400);
+
+    // Step C: Finish Sequence
+    // Wait for Delay (300ms) + Animation Duration (1200ms) = 1500ms
+    setTimeout(doneLoading, 1500);
+
+    // 4. Completion Function
+    function doneLoading() {
+        document.body.classList.remove("preloader-active");
+        
+        if (typeof lenis !== 'undefined') lenis.start();
+        
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        if(header) header.classList.add('header-loaded');
+        document.querySelector('.menu-full').classList.add('nav-loaded');
+
+        // Fade out overlay
+        ovrl.style.opacity = 0;
+        setTimeout(function () {
+            ovrl.style.display = "none";
+        }, 1000);
     }
-
-    ovInh.style.transform = "translateY(calc(100% - " + (progress * 50) + "%))";
- document.body.classList.add("preloader-active");
-
-    // Continue until we hit 100%
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      // Pause for 1s before finishing
-      setTimeout(doneLoading, 750);
-    }
-  }
-
-  function doneLoading() {
- document.body.classList.remove("preloader-active");
-    lenis.start();
-    header.classList.add('header-loaded');
-    nav.classList.add('nav-loaded');
-    setTimeout(function () {
-      ovrl.style.display = "none";
-      ovrl.style.opacity = 0;
-    }, 2000);
-  }
-
-  requestAnimationFrame(animate);
 }
 
 document.addEventListener('DOMContentLoaded', loadbar, false);
-
 
 
 })();
