@@ -194,6 +194,24 @@ requestAnimationFrame(raf);
   let PreFooter=document.querySelector('.pre-footer');
   let PreFooterElements=document.querySelectorAll('.image-group div');
   let PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
+// 1. Define your boundaries
+const maxW = 1920;
+const minW = 850;
+let responsiveScale = 1; // Default to 1x
+
+// 2. Calculate the scale based on current width
+if (window.innerWidth >= maxW) {
+    responsiveScale = 1;
+} else if (window.innerWidth <= minW) {
+    responsiveScale = 0.5;
+} else {
+    // Calculate percentage of width between 850 and 1920
+    const percentage = (window.innerWidth - minW) / (maxW - minW);
+    // Map that percentage to the 0.5 - 1.0 range
+    responsiveScale = 0.5 + (percentage * 0.5);
+}
+
+
 window.addEventListener("resize", function () {
   PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
   SectionArgo2FromTop=window.pageYOffset + SectionArgo2.getBoundingClientRect().top;
@@ -261,12 +279,15 @@ window.addEventListener("resize", function () {
     }
 */
 
-  
+  /*
     if (SectionArgo2.getBoundingClientRect().top - WindowHeight < 0 && SectionArgo2.getBoundingClientRect().top + SectionArgo2.clientHeight > 0) {
         SectionArgo2.animate({
           transform: "translateY(" + (-0.1 * (SectionArgo2FromTop - scroll)) + "px )"
         }, { duration: 1500, fill: "forwards" });
     }
+        */
+       const translation = -0.1 * responsiveScale * (SectionArgo2FromTop - scroll);
+       SectionArgo2.style.transform = "translateY(" + translation + "px)";
 
     if (PreFooter.getBoundingClientRect().top - 1.5*WindowHeight < 0 && PreFooter.getBoundingClientRect().top + PreFooter.clientHeight + 0.5*WindowHeight  > 0) {
         PreFooterElements[0].animate({

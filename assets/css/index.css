@@ -1834,10 +1834,6 @@ header img {
   .slider-track article:first-of-type {
     margin-left: 50px;
   }
-  /*Section 4*/
-  .grow-section .overlay {
-    padding-left: 50px;
-  }
   /*Section 2*/
   .section-2-left {
     width: 25vw;
@@ -2207,6 +2203,8 @@ header img {
 .section-argo-1-right {
   grid-column: span 6;
   position: relative;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .section-argo-1-right::before {
@@ -2576,4 +2574,123 @@ header img {
 }
 .simple-picture-faq .simple-picture-holder {
   padding-top: 45%;
+}
+
+@media screen and (max-width: 1324px) {
+  .section-argo-2-img {
+    width: 32%;
+    height: 300px;
+    position: absolute;
+    left: 50px;
+    top: -150px;
+  }
+  .section-7-holder {
+    width: 100%;
+    position: relative;
+    padding-top: 50%;
+  }
+  .section-argo-2 p {
+    grid-column: 7/span 6;
+    width: 93%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .header-2 .header-text {
+    grid-column: span 10;
+  }
+  .section-argo-1-right {
+    grid-column: 2/span 10;
+    position: relative;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin-top: 60px;
+  }
+  .section-argo-1-left {
+    grid-column: span 12;
+  }
+  .section-argo-2-img {
+    width: 36%;
+    top: -115px;
+  }
+  .section-argo-2 .maxw {
+    position: relative;
+    padding-top: 100px;
+  }
+  .section-argo-2-before {
+    padding-bottom: 250px;
+  }
+  .section-1-first .card {
+    position: relative;
+    flex: 0 0 630px;
+    width: 630px;
+    height: 506px;
+  }
+  .grow-section .overlay h2 {
+    width: 90%;
+  }
+  .section-6-element-holder {
+    position: relative;
+    padding-top: 50%;
+  }
+  .s-6-1 {
+    grid-column: span 12;
+    transition-delay: 0s;
+  }
+  .s-6-2 {
+    transition-delay: 0s;
+  }
+  .s-6-3 {
+    transition-delay: 0s;
+  }
+  .is-inview.section-6-element {
+    margin-top: 40px;
+  }
+  .section-6 h2 {
+    grid-column: span 12;
+    text-transform: uppercase;
+  }
+  .section-6-element {
+    grid-column: span 12;
+    margin-top: 70px;
+  }
+  .section-6-text {
+    position: absolute;
+    width: 80%;
+    left: 32px;
+    bottom: 32px;
+  }
+  .section-7 {
+    padding-top: 140px;
+  }
+  .mega-title {
+    font-size: 48px;
+    line-height: 1.2;
+  }
+  .section-7-text {
+    max-width: 661px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header-2 .header-text {
+    grid-column: span 12;
+  }
+  .header-2 .header-text h1 {
+    padding-bottom: 16px;
+  }
+  .booking-div {
+    right: 24px;
+    bottom: 24px;
+  }
+  .section-2 p, .section-2 h5 {
+    grid-column: span 12;
+  }
+  .section-2 p {
+    font-size: 24px;
+  }
+  .section-2 h5 {
+    font-size: 18px;
+  }
+  .section-2 .grid {
+    row-gap: 20px;
+  }
 }/*# sourceMappingURL=index.css.map */

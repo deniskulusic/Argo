@@ -1292,14 +1292,14 @@ footer .button-black-inverted:hover svg {
 .inverted .han-burger {
   background-color: #1B1E2B;
 }
-.inverted .main-button {
+.inverted .button-header {
   border: 1px solid #1B1E2B;
-  color: #1B1E2B;
-  background-color: transparent;
-}
-.inverted .main-button:hover {
-  background-color: #1b1e2b;
+  background-color: #1B1E2B;
   color: white;
+}
+.inverted .button-header:hover {
+  background-color: white;
+  color: #1B1E2B;
 }
 .inverted .menu-div h1 {
   cursor: pointer;
@@ -1329,4 +1329,215 @@ footer .button-black-inverted:hover svg {
   transform-origin: center;
   transform: translate3d(0, var(--y, 0px), 0) scale(var(--s, 1));
   will-change: transform;
+}
+
+/* =========================================
+   TABLET BREAKPOINT (max-width: 1024px)
+   ========================================= */
+@media screen and (max-width: 1024px) {
+  /* --- 1. Typography Scaling (Tablet) --- */
+  h1 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  h2 {
+    font-size: 34px;
+    line-height: 40px;
+  }
+  h3 {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 15px;
+  }
+  h6 {
+    font-size: 30px; /* Scaled down similarly to h2 */
+    line-height: 36px;
+  }
+  p {
+    font-size: 15px;
+  }
+  /* --- 2. Structural Spacing --- */
+  section {
+    padding-top: 100px; /* Reduce from 140px */
+  }
+  .container {
+    padding: 0 40px; /* Reduce from 50px */
+  }
+  /* --- 3. Menu Adjustments --- */
+  .menu-div-left-1 a {
+    font-size: 45px; /* Reduce menu link size */
+    line-height: 1.2;
+  }
+  /* Footer Mobile */
+  footer {
+    margin-top: 80px;
+    padding: 40px 0;
+  }
+  .footer-top .maxw {
+    gap: 30px;
+  }
+  .footer-top-1 {
+    grid-column: span 12;
+  }
+  .sign-up {
+    grid-column: span 12;
+  }
+  .footer-element {
+    grid-column: span 6;
+    padding: 48px 0;
+  }
+  .footer-text-element {
+    grid-column: 1/span 6;
+  }
+  .footer-logo-element {
+    grid-column: span 4;
+  }
+  .footer-element-last {
+    padding-top: 0;
+    padding-bottom: 70px;
+  }
+  .sign-up {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 15px;
+  }
+  .sign-up input {
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #000;
+  }
+  .footer-bottom {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+/* =========================================
+   MOBILE BREAKPOINT (max-width: 768px)
+   ========================================= */
+@media screen and (max-width: 768px) {
+  /* --- 1. Typography Scaling (Mobile) --- */
+  h1 {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: 1px; /* Reduce spacing for mobile fit */
+  }
+  h2 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: 24px;
+    line-height: 1.3;
+    text-align: left; /* Often reads better left-aligned on mobile */
+  }
+  h4 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  h5 {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  h6 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  p {
+    font-size: 16px; /* Keep legible */
+    line-height: 1.6;
+    width: 100% !important; /* Override desktop width restrictions */
+  }
+  .click-underline {
+    font-size: 15px; /* Slightly smaller action links */
+  }
+  /* --- 2. Global Layout Resets --- */
+  .grid {
+    -moz-column-gap: 32px;
+         column-gap: 32px; /* Space between stacked elements */
+  }
+  .container {
+    padding: 0 24px; /* Standard mobile padding */
+  }
+  section {
+    padding-top: 70px; /* Tighter spacing for mobile */
+  }
+  .first-section {
+    padding-top: 50px !important;
+  }
+  /* Menu Overlay Mobile */
+  .menu-div {
+    gap: 40px;
+  }
+  .menu-active .menu-div {
+    height: calc(100vh - 80px);
+  }
+  .menu-div-left-1 {
+    gap: 30px;
+    grid-column: span 12;
+  }
+  .menu-div-left-1 a {
+    font-size: 32px; /* Much smaller to fit screen */
+    line-height: 42px;
+  }
+  .menu-div-right {
+    grid-column: span 12;
+    align-items: start;
+  }
+  .lng {
+    justify-content: flex-start; /* Align languages to left */
+    margin-top: 50px;
+  }
+  .menu-div-top .menu-socials {
+    margin-top: 24px;
+  }
+  .menu-div-left {
+    gap: 50px;
+  }
+  .button-header-holder {
+    display: none;
+  }
+  .navbar {
+    padding: 0 24px;
+    height: 80px;
+  }
+  .han-menu-full {
+    padding-left: 0;
+    width: auto;
+    order: 2;
+  }
+  .footer-element {
+    grid-column: span 12;
+    padding: 50px 0;
+    padding-bottom: 50px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+  .footer-text {
+    margin-bottom: 0px;
+  }
+  .footer-logo-element {
+    grid-column: span 7;
+    padding-top: 24px;
+  }
+  .footer-line {
+    margin-top: 24px;
+  }
+  .footer-top {
+    padding-bottom: 30px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    padding-top: 60px;
+  }
 }/*# sourceMappingURL=general.css.map */
