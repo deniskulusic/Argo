@@ -354,7 +354,7 @@ p {
 }
 
 .main-button {
-  padding: 14px 54px;
+  padding: 18px 54px;
   font-size: 16px;
   border: 1px solid white;
   color: white;
@@ -970,6 +970,11 @@ footer {
   padding: 60px 0;
   margin-top: 140px;
 }
+footer .main-button {
+  min-width: 263px;
+  display: flex;
+  justify-content: center;
+}
 footer .button-black {
   color: #1B1E2B;
   border: 1px solid #1B1E2B;
@@ -1539,5 +1544,8 @@ footer .button-black-inverted:hover svg {
     align-items: flex-start;
     gap: 32px;
     padding-top: 60px;
+  }
+  .main-button {
+    padding: 14px 43px;
   }
 }/*# sourceMappingURL=general.css.map */

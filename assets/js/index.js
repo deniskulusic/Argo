@@ -194,6 +194,10 @@ requestAnimationFrame(raf);
   let PreFooter=document.querySelector('.pre-footer');
   let PreFooterElements=document.querySelectorAll('.image-group div');
   let PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
+
+  let translation=0;
+      // 2. Define the unique speed for each element (based on your snippet)
+const factors = [0.22, 0.15, 0.08, 0.15, 0.22];
 // 1. Define your boundaries
 const maxW = 1920;
 const minW = 850;
@@ -286,27 +290,28 @@ window.addEventListener("resize", function () {
         }, { duration: 1500, fill: "forwards" });
     }
         */
-       const translation = -0.1 * responsiveScale * (SectionArgo2FromTop - scroll);
+
+       translation = -0.1 * responsiveScale * (SectionArgo2FromTop - scroll);
        SectionArgo2.style.transform = "translateY(" + translation + "px)";
 
-    if (PreFooter.getBoundingClientRect().top - 1.5*WindowHeight < 0 && PreFooter.getBoundingClientRect().top + PreFooter.clientHeight + 0.5*WindowHeight  > 0) {
-        PreFooterElements[0].animate({
-          transform: "translateY(" + (0.22 * (PreFooterFromTop - scroll)) + "px )"
-        }, { duration: 1500, fill: "forwards" });
-        PreFooterElements[1].animate({
-          transform: "translateY(" + (0.15 * (PreFooterFromTop - scroll)) + "px )"
-        }, { duration: 1500, fill: "forwards" });
-        PreFooterElements[2].animate({
-          transform: "translateY(" + (0.08 * (PreFooterFromTop - scroll)) + "px )"
-        }, { duration: 1500, fill: "forwards" });
-        PreFooterElements[3].animate({
-          transform: "translateY(" + (0.15 * (PreFooterFromTop - scroll)) + "px )"
-        }, { duration: 1500, fill: "forwards" });
-        PreFooterElements[4].animate({
-          transform: "translateY(" + (0.22 * (PreFooterFromTop - scroll)) + "px )"
-        }, { duration: 1500, fill: "forwards" });
 
+
+// 3. Check Visibility
+if (PreFooter.getBoundingClientRect().top - 1.5 * WindowHeight < 0 && 
+    PreFooter.getBoundingClientRect().top + PreFooter.clientHeight + 0.5 * WindowHeight > 0) {
+
+    // Loop through the elements
+    // Assuming PreFooterElements is a NodeList or Array
+    for (let i = 0; i < PreFooterElements.length; i++) {
+        if (factors[i] !== undefined) {
+            // Calculate distance
+            let val = factors[i] * responsiveScale * (PreFooterFromTop - scroll);
+            
+            // Apply style directly (more performant than .animate)
+            PreFooterElements[i].style.transform = "translateY(" + val + "px)";
+        }
     }
+}
   
   });
 
