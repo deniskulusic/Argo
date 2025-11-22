@@ -998,7 +998,7 @@ footer h3 {
 }
 
 .footer-top-1 {
-  grid-column: span 4;
+  grid-column: span 6;
 }
 
 .footer-top {
@@ -1205,8 +1205,8 @@ footer .button-black-inverted:hover svg {
 .footer-text {
   color: #1A1E25;
   opacity: 0.6;
-  font-size: 27px;
-  line-height: 30.5px;
+  font-size: 24px;
+  line-height: 26.5px;
   margin-bottom: 35px;
   align-items: end;
   justify-content: start;
