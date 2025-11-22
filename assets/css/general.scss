@@ -528,7 +528,9 @@ p {
   width: 30%;
   display: flex;
   justify-content: end;
-
+  button{
+    display: none;
+  }
 }
 
 .han-menu-full {
@@ -1108,7 +1110,7 @@ footer {
 }
 
 .footer-top-1 {
-  grid-column: span 4;
+  grid-column: span 5;
 }
 
 .footer-top {
@@ -1659,7 +1661,7 @@ footer{
 
   /* --- 2. Global Layout Resets --- */
   .grid {
-    column-gap: 32px; /* Space between stacked elements */
+    column-gap: 24px; /* Space between stacked elements */
   }
 
   .container {

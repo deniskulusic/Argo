@@ -29,6 +29,14 @@ header img {
   transition: 0.9s;
 }
 
+.video-mobile {
+  display: none;
+}
+
+.video-desktop {
+  display: block;
+}
+
 .header-tint {
   position: absolute;
   left: 0;
@@ -2223,6 +2231,7 @@ header img {
   display: flex;
   margin-top: 60px;
   gap: 20px;
+  flex-wrap: wrap;
 }
 .section-argo-1-left-div span {
   font-size: 12px;
@@ -2705,6 +2714,12 @@ header img {
   .header-2 .header-text h1 {
     padding-bottom: 16px;
   }
+  .video-mobile {
+    display: block;
+  }
+  .video-desktop {
+    display: none;
+  }
   .booking-div {
     right: 24px;
     bottom: 24px;
@@ -2838,7 +2853,7 @@ header img {
   .section-7-text div {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 24px;
     align-items: start;
     flex-direction: column;
     padding-right: 24px;
@@ -2867,6 +2882,9 @@ header img {
   }
   .acordation-grid {
     margin-top: 28px;
+  }
+  .section-argo-1-left-div div {
+    width: 28%;
   }
 }
 .loader-ring {

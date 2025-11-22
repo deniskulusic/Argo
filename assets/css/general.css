@@ -483,6 +483,9 @@ p {
   display: flex;
   justify-content: end;
 }
+.button-header-holder button {
+  display: none;
+}
 
 .han-menu-full {
   display: flex;
@@ -998,7 +1001,7 @@ footer h3 {
 }
 
 .footer-top-1 {
-  grid-column: span 6;
+  grid-column: span 5;
 }
 
 .footer-top {
@@ -1205,8 +1208,8 @@ footer .button-black-inverted:hover svg {
 .footer-text {
   color: #1A1E25;
   opacity: 0.6;
-  font-size: 24px;
-  line-height: 26.5px;
+  font-size: 27px;
+  line-height: 30.5px;
   margin-bottom: 35px;
   align-items: end;
   justify-content: start;
@@ -1464,8 +1467,8 @@ footer .button-black-inverted:hover svg {
   }
   /* --- 2. Global Layout Resets --- */
   .grid {
-    -moz-column-gap: 32px;
-         column-gap: 32px; /* Space between stacked elements */
+    -moz-column-gap: 24px;
+         column-gap: 24px; /* Space between stacked elements */
   }
   .container {
     padding: 0 24px; /* Standard mobile padding */
