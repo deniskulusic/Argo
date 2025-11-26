@@ -248,6 +248,13 @@ picture img {
   object-fit: cover;
 }
 
+picture video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
 section {
   width: 100%;
   height: auto;
@@ -323,6 +330,7 @@ h3 {
 
 
 }
+
 h4 {
   font-family: "aviano-sans", sans-serif;
 
@@ -528,7 +536,8 @@ p {
   width: 30%;
   display: flex;
   justify-content: end;
-  button{
+
+  button {
     display: none;
   }
 }
@@ -719,12 +728,17 @@ p {
   justify-content: baseline;
   display: flex;
   align-items: center;
-    overflow: auto;          /* or scroll */
-  scrollbar-width: none;   /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  overflow: auto;
+  /* or scroll */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
+
 .menu-div::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none;
+  /* Chrome, Safari, Edge */
 }
 
 .menu-div-right {
@@ -803,6 +817,7 @@ p {
   .lng {
     color: rgb(55, 55, 55);
   }
+
   .lngactive {
     color: #1B1E2B;
   }
@@ -923,12 +938,14 @@ footer {
   background-color: white;
   padding: 60px 0;
   margin-top: 140px;
-  .main-button{
+
+  .main-button {
     min-width: 263px;
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
   }
-.button-black {
+
+  .button-black {
     color: #1B1E2B;
     border: 1px solid #1B1E2B;
     background-color: transparent;
@@ -938,10 +955,12 @@ footer {
 
     background-color: #1B1E2B;
     color: white;
-    svg{
+
+    svg {
       filter: brightness(1000000%);
     }
   }
+
   h3 {
     grid-column: span 5;
     font-size: 38px;
@@ -966,30 +985,35 @@ footer {
   .maxw {
     align-items: center;
   }
-  
-}
-.footer-line{
-    border-bottom: 1px solid #1A1E25;
-    grid-column: span 12;
 
 }
-footer{
+
+.footer-line {
+  border-bottom: 1px solid #1A1E25;
+  grid-column: span 12;
+
+}
+
+footer {
 
 
-.button-black-inverted{
-  background-color: #1A1E25;
-  color: white;
-  svg{
-    filter: brightness(100000%);
+  .button-black-inverted {
+    background-color: #1A1E25;
+    color: white;
+
+    svg {
+      filter: brightness(100000%);
+    }
   }
-}
-.button-black-inverted:hover{
-  background-color: white;
-  color: black;
-  svg{
-    filter: brightness(0%);
+
+  .button-black-inverted:hover {
+    background-color: white;
+    color: black;
+
+    svg {
+      filter: brightness(0%);
+    }
   }
-}
 }
 
 .footer-line {
@@ -1008,12 +1032,14 @@ footer{
   height: fit-content;
   padding-left: 0px;
   justify-content: end;
-  .button-black{
-    a{
+
+  .button-black {
+    a {
       display: flex;
       align-items: center;
     }
-    svg{
+
+    svg {
       margin-right: 8px;
     }
   }
@@ -1302,16 +1328,16 @@ footer{
     background-color: #1B1E2B;
   }
 
-    .button-header {
-  border: 1px solid #1B1E2B;
-  background-color:#1B1E2B ;
-  color: white;
-}
+  .button-header {
+    border: 1px solid #1B1E2B;
+    background-color: #1B1E2B;
+    color: white;
+  }
 
-.button-header:hover {
-  background-color: white;
-  color: #1B1E2B;
-}
+  .button-header:hover {
+    background-color: white;
+    color: #1B1E2B;
+  }
 
   .menu-div h1 {
     cursor: pointer;
@@ -1349,13 +1375,25 @@ footer{
 }
 
 
+/*Section Video*/
+.section-video {}
+
+.section-video-wrapper {
+  grid-column: span 12;
+}
+
+.section-video-holder {
+  padding-top: 55%;
+  position: relative;
+}
+
 
 
 /* =========================================
    TABLET BREAKPOINT (max-width: 1024px)
    ========================================= */
 @media screen and (max-width: 1024px) {
-  
+
   /* --- 1. Typography Scaling (Tablet) --- */
   h1 {
     font-size: 48px;
@@ -1381,7 +1419,8 @@ footer{
   }
 
   h6 {
-    font-size: 30px; /* Scaled down similarly to h2 */
+    font-size: 30px;
+    /* Scaled down similarly to h2 */
     line-height: 36px;
   }
 
@@ -1391,16 +1430,19 @@ footer{
 
   /* --- 2. Structural Spacing --- */
   section {
-    padding-top: 100px; /* Reduce from 140px */
+    padding-top: 100px;
+    /* Reduce from 140px */
   }
 
   .container {
-    padding: 0 40px; /* Reduce from 50px */
+    padding: 0 40px;
+    /* Reduce from 50px */
   }
-  
+
   /* --- 3. Menu Adjustments --- */
   .menu-div-left-1 a {
-    font-size: 45px; /* Reduce menu link size */
+    font-size: 45px;
+    /* Reduce menu link size */
     line-height: 1.2;
   }
 
@@ -1413,28 +1455,33 @@ footer{
   .footer-top .maxw {
     gap: 30px;
   }
+
   .footer-top-1 {
-  grid-column: span 12;
-}
-.sign-up {
-  grid-column: span 12;
-}
+    grid-column: span 12;
+  }
+
+  .sign-up {
+    grid-column: span 12;
+  }
 
 
-.footer-element {
-  grid-column: span 6;
-  padding: 48px 0;
-}
-.footer-text-element {
-  grid-column: 1/span 6;
-}
-.footer-logo-element {
-  grid-column: span 4;
-}
-.footer-element-last{
-  padding-top: 0;
-  padding-bottom: 70px;
-}
+  .footer-element {
+    grid-column: span 6;
+    padding: 48px 0;
+  }
+
+  .footer-text-element {
+    grid-column: 1/span 6;
+  }
+
+  .footer-logo-element {
+    grid-column: span 4;
+  }
+
+  .footer-element-last {
+    padding-top: 0;
+    padding-bottom: 70px;
+  }
 
   .sign-up {
     flex-direction: column;
@@ -1465,7 +1512,8 @@ footer{
   h1 {
     font-size: 36px;
     line-height: 1.15;
-    letter-spacing: 1px; /* Reduce spacing for mobile fit */
+    letter-spacing: 1px;
+    /* Reduce spacing for mobile fit */
   }
 
   h2 {
@@ -1476,7 +1524,8 @@ footer{
   h3 {
     font-size: 24px;
     line-height: 1.3;
-    text-align: left; /* Often reads better left-aligned on mobile */
+    text-align: left;
+    /* Often reads better left-aligned on mobile */
   }
 
   h4 {
@@ -1495,26 +1544,32 @@ footer{
   }
 
   p {
-    font-size: 16px; /* Keep legible */
+    font-size: 16px;
+    /* Keep legible */
     line-height: 1.6;
-    width: 100% !important; /* Override desktop width restrictions */
+    width: 100% !important;
+    /* Override desktop width restrictions */
   }
 
   .click-underline {
-    font-size: 15px; /* Slightly smaller action links */
+    font-size: 15px;
+    /* Slightly smaller action links */
   }
 
   /* --- 2. Global Layout Resets --- */
   .grid {
-    column-gap: 24px; /* Space between stacked elements */
+    column-gap: 24px;
+    /* Space between stacked elements */
   }
 
   .container {
-    padding: 0 24px; /* Standard mobile padding */
+    padding: 0 24px;
+    /* Standard mobile padding */
   }
 
   section {
-    padding-top: 70px; /* Tighter spacing for mobile */
+    padding-top: 70px;
+    /* Tighter spacing for mobile */
   }
 
   .first-section {
@@ -1526,49 +1581,59 @@ footer{
   .menu-div {
     gap: 40px;
   }
+
   .menu-active .menu-div {
-  height: calc(100vh - 80px);
-}
-.menu-div-left-1 {
-  gap: 30px;
-  grid-column: span 12;
-}
-  
+    height: calc(100vh - 80px);
+  }
+
+  .menu-div-left-1 {
+    gap: 30px;
+    grid-column: span 12;
+  }
+
   .menu-div-left-1 a {
-    font-size: 32px; /* Much smaller to fit screen */
+    font-size: 32px;
+    /* Much smaller to fit screen */
     line-height: 42px;
   }
+
   .menu-div-right {
-  grid-column: span 12;
-  align-items: start;
+    grid-column: span 12;
+    align-items: start;
   }
+
   .lng {
-    justify-content: flex-start; /* Align languages to left */
+    justify-content: flex-start;
+    /* Align languages to left */
     margin-top: 50px;
   }
-  .menu-div-top{
-    .menu-socials{
+
+  .menu-div-top {
+    .menu-socials {
       margin-top: 24px;
     }
   }
+
   .menu-div-left {
-  gap: 50px;
+    gap: 50px;
   }
-  .button-header-holder{
+
+  .button-header-holder {
     display: none;
   }
-  
+
   .navbar {
     padding: 0 24px;
     height: 80px;
   }
-  
+
   .han-menu-full {
     padding-left: 0;
     width: auto;
     order: 2;
   }
-   .footer-element {
+
+  .footer-element {
     grid-column: span 12;
     padding: 50px 0;
     padding-bottom: 50px;
@@ -1577,26 +1642,37 @@ footer{
     flex-direction: column;
     row-gap: 16px;
   }
+
   .footer-text {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
   }
- .footer-logo-element {
+
+  .footer-logo-element {
     grid-column: span 7;
     padding-top: 24px;
   }
+
   .footer-line {
-  margin-top: 24px;
+    margin-top: 24px;
   }
-.footer-top {
-  padding-bottom: 30px;
-} .footer-bottom {
+
+  .footer-top {
+    padding-bottom: 30px;
+  }
+
+  .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
     padding-top: 60px;
-}
-.main-button {
-  padding: 14px 43px;
-}
+  }
 
+  .main-button {
+    padding: 14px 43px;
+  }
+
+  .section-video-holder {
+    padding-top: 120%;
+    position: relative;
+  }
 }

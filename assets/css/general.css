@@ -226,6 +226,13 @@ picture img {
   object-fit: cover;
 }
 
+picture video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
 section {
   width: 100%;
   height: auto;
@@ -641,13 +648,17 @@ p {
   justify-content: baseline;
   display: flex;
   align-items: center;
-  overflow: auto; /* or scroll */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  overflow: auto;
+  /* or scroll */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 .menu-div::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none;
+  /* Chrome, Safari, Edge */
 }
 
 .menu-div-right {
@@ -1188,6 +1199,16 @@ footer .button-black-inverted:hover svg {
   will-change: transform;
 }
 
+/*Section Video*/
+.section-video-wrapper {
+  grid-column: span 12;
+}
+
+.section-video-holder {
+  padding-top: 55%;
+  position: relative;
+}
+
 /* =========================================
    TABLET BREAKPOINT (max-width: 1024px)
    ========================================= */
@@ -1212,7 +1233,8 @@ footer .button-black-inverted:hover svg {
     font-size: 15px;
   }
   h6 {
-    font-size: 30px; /* Scaled down similarly to h2 */
+    font-size: 30px;
+    /* Scaled down similarly to h2 */
     line-height: 36px;
   }
   p {
@@ -1220,14 +1242,17 @@ footer .button-black-inverted:hover svg {
   }
   /* --- 2. Structural Spacing --- */
   section {
-    padding-top: 100px; /* Reduce from 140px */
+    padding-top: 100px;
+    /* Reduce from 140px */
   }
   .container {
-    padding: 0 40px; /* Reduce from 50px */
+    padding: 0 40px;
+    /* Reduce from 50px */
   }
   /* --- 3. Menu Adjustments --- */
   .menu-div-left-1 a {
-    font-size: 45px; /* Reduce menu link size */
+    font-size: 45px;
+    /* Reduce menu link size */
     line-height: 1.2;
   }
   /* Footer Mobile */
@@ -1283,7 +1308,8 @@ footer .button-black-inverted:hover svg {
   h1 {
     font-size: 36px;
     line-height: 1.15;
-    letter-spacing: 1px; /* Reduce spacing for mobile fit */
+    letter-spacing: 1px;
+    /* Reduce spacing for mobile fit */
   }
   h2 {
     font-size: 28px;
@@ -1292,7 +1318,8 @@ footer .button-black-inverted:hover svg {
   h3 {
     font-size: 24px;
     line-height: 1.3;
-    text-align: left; /* Often reads better left-aligned on mobile */
+    text-align: left;
+    /* Often reads better left-aligned on mobile */
   }
   h4 {
     font-size: 18px;
@@ -1307,23 +1334,29 @@ footer .button-black-inverted:hover svg {
     line-height: 1.2;
   }
   p {
-    font-size: 16px; /* Keep legible */
+    font-size: 16px;
+    /* Keep legible */
     line-height: 1.6;
-    width: 100% !important; /* Override desktop width restrictions */
+    width: 100% !important;
+    /* Override desktop width restrictions */
   }
   .click-underline {
-    font-size: 15px; /* Slightly smaller action links */
+    font-size: 15px;
+    /* Slightly smaller action links */
   }
   /* --- 2. Global Layout Resets --- */
   .grid {
     -moz-column-gap: 24px;
-         column-gap: 24px; /* Space between stacked elements */
+         column-gap: 24px;
+    /* Space between stacked elements */
   }
   .container {
-    padding: 0 24px; /* Standard mobile padding */
+    padding: 0 24px;
+    /* Standard mobile padding */
   }
   section {
-    padding-top: 70px; /* Tighter spacing for mobile */
+    padding-top: 70px;
+    /* Tighter spacing for mobile */
   }
   .first-section {
     padding-top: 50px !important;
@@ -1340,7 +1373,8 @@ footer .button-black-inverted:hover svg {
     grid-column: span 12;
   }
   .menu-div-left-1 a {
-    font-size: 32px; /* Much smaller to fit screen */
+    font-size: 32px;
+    /* Much smaller to fit screen */
     line-height: 42px;
   }
   .menu-div-right {
@@ -1348,7 +1382,8 @@ footer .button-black-inverted:hover svg {
     align-items: start;
   }
   .lng {
-    justify-content: flex-start; /* Align languages to left */
+    justify-content: flex-start;
+    /* Align languages to left */
     margin-top: 50px;
   }
   .menu-div-top .menu-socials {
@@ -1399,5 +1434,9 @@ footer .button-black-inverted:hover svg {
   }
   .main-button {
     padding: 14px 43px;
+  }
+  .section-video-holder {
+    padding-top: 120%;
+    position: relative;
   }
 }/*# sourceMappingURL=general.css.map */

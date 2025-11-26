@@ -8,7 +8,7 @@
 }
 
 header {
-  height: 100dvh;
+  height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -1584,12 +1584,16 @@ header img {
 
 /* Make lagging grow-section visually behind other content and avoid pointer issues */
 .grow-section.lagging {
-  pointer-events: none; /* optional: so content under it can be clicked while lagging */
-  z-index: 0; /* behind normal sections */
+  pointer-events: none;
+  /* optional: so content under it can be clicked while lagging */
+  z-index: 0;
+  /* behind normal sections */
 }
 
-.section, .header {
-  z-index: 1; /* normal content above lagging grow */
+.section,
+.header {
+  z-index: 1;
+  /* normal content above lagging grow */
 }
 
 /* ensure the frame still preserves transform origin */
@@ -2417,7 +2421,8 @@ header img {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 1s ease-out, visibility 1s ease-out; /* specific transition for fade out */
+  transition: opacity 1s ease-out, visibility 1s ease-out;
+  /* specific transition for fade out */
 }
 
 /* Container for Logo and Ring */
@@ -2432,10 +2437,13 @@ header img {
 
 /* The Logo Image */
 #loader-logo {
-  width: 180px; /* Adjust size as needed */
+  width: 180px;
+  /* Adjust size as needed */
   height: auto;
-  opacity: 0; /* Hidden initially */
-  transition: opacity 0.3s ease-in; /* The 0.2s Fade In */
+  opacity: 0;
+  /* Hidden initially */
+  transition: opacity 0.3s ease-in;
+  /* The 0.2s Fade In */
 }
 
 /* The SVG Ring Wrapper */
@@ -2443,7 +2451,8 @@ header img {
   position: absolute;
   top: 0;
   left: 0;
-  transform: rotate(-90deg); /* Rotate so drawing starts at top */
+  transform: rotate(-90deg);
+  /* Rotate so drawing starts at top */
 }
 
 /* The Actual Drawing Circle */
@@ -2539,7 +2548,8 @@ header img {
   font-size: 18px;
 }
 
-.arrow-a::before, .arrow-a::after {
+.arrow-a::before,
+.arrow-a::after {
   content: "";
   display: block;
   width: 21px;
@@ -2957,7 +2967,8 @@ h4 .word-token {
 /* Ensure the holder can stack layers and clip edges */
 .section-2-right-down-right-holder {
   position: relative;
-  overflow: hidden; /* important for the wipe edge */
+  overflow: hidden;
+  /* important for the wipe edge */
 }
 
 /* Layer that performs the wipe over the current image */
@@ -2981,16 +2992,20 @@ h4 .word-token {
 
 /* Wipe animation (no opacity/translate) */
 .wipe-enter {
-  clip-path: inset(0 0 0 100%); /* fully hidden: right side clipped */
+  clip-path: inset(0 0 0 100%);
+  /* fully hidden: right side clipped */
 }
 
 .wipe-enter-active {
-  clip-path: inset(0 0 0 0); /* fully revealed */
-  transition: clip-path 800ms cubic-bezier(0.215, 0.61, 0.355, 1); /* tweak timing as you like */
+  clip-path: inset(0 0 0 0);
+  /* fully revealed */
+  transition: clip-path 800ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  /* tweak timing as you like */
 }
 
 /* Per-line clip + slide (no opacity) */
-.line-block { /* wrapper around the whole text block */
+.line-block {
+  /* wrapper around the whole text block */
   position: relative;
 }
 
@@ -3332,7 +3347,8 @@ h4 .word-token {
   .image.--3 {
     left: -5vw;
   }
-  .image.--1, .image.--3 {
+  .image.--1,
+  .image.--3 {
     height: 46.167vw;
     width: 40.167vw;
   }
@@ -3403,7 +3419,8 @@ h4 .word-token {
     right: 24px;
     bottom: 24px;
   }
-  .section-2 p, .section-2 h5 {
+  .section-2 p,
+  .section-2 h5 {
     grid-column: span 12;
   }
   .section-2 p {
@@ -3424,15 +3441,18 @@ h4 .word-token {
     margin-bottom: 0;
   }
   .image-group {
-    width: 200%; /* Allow it to be wider but contained */
+    width: 200%;
+    /* Allow it to be wider but contained */
     left: -50%;
     margin-top: 40px;
   }
-  .image.--0, .image.--4 {
+  .image.--0,
+  .image.--4 {
     height: 40vw;
     width: 30vw;
   }
-  .image.--1, .image.--3 {
+  .image.--1,
+  .image.--3 {
     height: 64vw;
     width: 40vw;
     left: 8vw;

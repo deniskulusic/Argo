@@ -1184,6 +1184,35 @@
   // Also init section-6 if it exists
   document.querySelectorAll('.section-6').forEach(initSectionOnce);
 
+  // Select all videos: The header ones AND the section one
+  // We select .hero-video (header) and .video-on-scroll (your previous section)
+  const videos = document.querySelectorAll("video");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // "target" is the specific video element being watched
+      const video = entry.target;
+
+      if (entry.isIntersecting) {
+        // Video is in view: Play it
+        // We add a safety check to ensure we don't play hidden (display:none) videos
+        if (video.offsetWidth > 0 && video.offsetHeight > 0) {
+          video.play().catch(e => console.log("Auto-play prevented"));
+        }
+      } else {
+        // Video went off screen: Pause it
+        video.pause();
+      }
+    });
+  }, {
+    threshold: 0.1 // Trigger as soon as 10% of the video is visible/hidden
+  });
+
+  // Attach the observer to every video found
+  videos.forEach((video) => {
+    observer.observe(video);
+  });
+
 
   /* ================= GALLERY LOGIC (DYNAMIC REUSABLE) ================= */
   (function () {

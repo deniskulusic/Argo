@@ -86,7 +86,7 @@
     const VH = () => window.innerHeight || document.documentElement.clientHeight;
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-    const items = Array.from(document.querySelectorAll('.section-3-element-holder , .section-7-holder , .section-10-img-holder , .blog-element-holder ,.section-argo-1-right-holder , .section-argo-2-img'))
+    const items = Array.from(document.querySelectorAll('.s-a-a-7-holder , .s-a-a-6-bottom-left'))
         .map(el => {
             const picture = el.querySelector('picture');
             const img = picture && picture.querySelector('img');
@@ -191,7 +191,6 @@
     let PreFooterFromTop = window.pageYOffset + PreFooter.getBoundingClientRect().top;
     window.addEventListener("resize", function () {
         PreFooterFromTop = window.pageYOffset + PreFooter.getBoundingClientRect().top;
-        Section6ImgsFromTop = window.pageYOffset + Section6.getBoundingClientRect().top;
     });
 
 
@@ -439,4 +438,234 @@
             lenis.start();
         }
     });
+
+
+    const accordionTop = document.querySelector('.s-a-a-4-acordation-top');
+    const accordionBottom = document.querySelector('.s-a-a-4-acordation-bottom');
+    const tabHeaders = document.querySelectorAll('.s-a-a-4-acordation-bottom-top-element');
+    const tabContents = document.querySelectorAll('.s-a-a-4-acordation-bottom-bottom');
+
+    // Helper function to update height
+    function updateAccordionHeight() {
+        // Only update if the accordion is currently open (has a max-height set)
+        if (accordionBottom.style.maxHeight) {
+            accordionBottom.style.maxHeight = accordionBottom.scrollHeight + "px";
+        }
+    }
+
+    // --- PART 1: Accordion Toggle ---
+    accordionTop.addEventListener('click', function () {
+        this.classList.toggle('active');
+
+        if (accordionBottom.style.maxHeight) {
+            accordionBottom.style.maxHeight = null; // Close
+        } else {
+            accordionBottom.style.maxHeight = accordionBottom.scrollHeight + "px"; // Open
+        }
+    });
+
+    // --- PART 2: Inner Tabs Switching ---
+    tabHeaders.forEach((header, index) => {
+        header.addEventListener('click', () => {
+            // Remove active class from all
+            tabHeaders.forEach(h => h.classList.remove('s-a-a-4-acordation-bottom-top-element-active'));
+            tabContents.forEach(c => c.classList.remove('s-a-a-4-acordation-bottom-bottom-active'));
+
+            // Add active class to clicked element
+            header.classList.add('s-a-a-4-acordation-bottom-top-element-active');
+
+            if (tabContents[index]) {
+                tabContents[index].classList.add('s-a-a-4-acordation-bottom-bottom-active');
+            }
+
+            // Recalculate height immediately after switching tabs
+            updateAccordionHeight();
+        });
+    });
+
+    // --- PART 3: Window Resize Handler (The New Fix) ---
+    window.addEventListener('resize', function () {
+        // If the accordion is open, recalculate the height as the window changes size
+        updateAccordionHeight();
+    });
+
+    // Select all tab buttons and content areas
+    const tabs = document.querySelectorAll('.s-a-a-6-top-element');
+    const contents = document.querySelectorAll('.s-a-a-6-bottom');
+
+    // Loop through each tab to add a click event listener
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+
+            // 1. Deactivate all tabs
+            tabs.forEach(t => t.classList.remove('s-a-a-6-top-element-active'));
+
+            // 2. Activate the clicked tab
+            tab.classList.add('s-a-a-6-top-element-active');
+
+            // 3. Hide all content areas
+            contents.forEach(c => c.classList.remove('s-a-a-6-bottom-active'));
+
+            // 4. Show the content area that matches the index of the clicked tab
+            if (contents[index]) {
+                contents[index].classList.add('s-a-a-6-bottom-active');
+            }
+            lenis.resize();
+        });
+    });
+
+
+    // Select all videos: The header ones AND the section one
+    // We select .hero-video (header) and .video-on-scroll (your previous section)
+    const videos = document.querySelectorAll("video");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            // "target" is the specific video element being watched
+            const video = entry.target;
+
+            if (entry.isIntersecting) {
+                // Video is in view: Play it
+                // We add a safety check to ensure we don't play hidden (display:none) videos
+                if (video.offsetWidth > 0 && video.offsetHeight > 0) {
+                    video.play().catch(e => console.log("Auto-play prevented"));
+                }
+            } else {
+                // Video went off screen: Pause it
+                video.pause();
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger as soon as 10% of the video is visible/hidden
+    });
+
+    // Attach the observer to every video found
+    videos.forEach((video) => {
+        observer.observe(video);
+    });
+
+    /* ================= GALLERY LOGIC (DYNAMIC REUSABLE) ================= */
+    (function () {
+        // DOM elements
+        const gallery = document.querySelector('.fullscreen-gallery');
+        // Safety check if gallery HTML exists
+        if (!gallery) return;
+
+        const galleryTrack = gallery.querySelector('.gallery-track');
+        const closeBtn = gallery.querySelector('.gallery-close-btn');
+        const prevBtn = gallery.querySelector('.gallery-prev');
+        const nextBtn = gallery.querySelector('.gallery-next');
+        const galleryCounter = gallery.querySelector('.gallery-counter');
+
+        // State
+        let currentIndex = -1;
+        let totalSlides = 0;
+        const TRANSITION_DURATION = 700;
+
+        // 1. Build slides based on passed Array of URLs
+        function buildGallerySlides(imgUrls) {
+            galleryTrack.innerHTML = ''; // Clear existing content
+            totalSlides = imgUrls.length;
+
+            imgUrls.forEach(url => {
+                const slide = document.createElement('div');
+                slide.classList.add('gallery-slide');
+                // Create image
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = 'Gallery image';
+                // Append
+                slide.appendChild(img);
+                galleryTrack.appendChild(slide);
+            });
+        }
+
+        // 2. Update the gallery view
+        function updateGallery(immediate = false) {
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+
+            const offset = currentIndex * -100; // vw unit
+            galleryTrack.style.transitionDuration = immediate ? '0ms' : `${TRANSITION_DURATION}ms`;
+            galleryTrack.style.transform = `translateX(${offset}vw)`;
+
+            // Update buttons and counter
+            if (prevBtn) prevBtn.disabled = currentIndex === 0;
+            if (nextBtn) nextBtn.disabled = currentIndex === totalSlides - 1;
+            if (galleryCounter) galleryCounter.textContent = `${currentIndex + 1}/${totalSlides}`;
+        }
+
+        // 3. Close Function
+        function closeGallery() {
+            gallery.classList.remove('is-open');
+            gallery.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // 4. Navigation
+        function navigate(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentIndex = newIndex;
+                updateGallery(false);
+            }
+        }
+
+        // --- Event Listeners ---
+        if (closeBtn) closeBtn.addEventListener('click', closeGallery);
+        if (prevBtn) prevBtn.addEventListener('click', () => navigate(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => navigate(1));
+
+        document.addEventListener('keydown', (e) => {
+            if (!gallery.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeGallery();
+            else if (e.key === 'ArrowLeft') navigate(-1);
+            else if (e.key === 'ArrowRight') navigate(1);
+        });
+
+        // --- EXPOSE TO WINDOW ---
+        // This allows Section 2 to call this function
+        window.openGlobalGallery = function (imageUrls, startIndex) {
+            if (!imageUrls || !imageUrls.length) return;
+
+            // 1. Build the track with the specific images from the section
+            buildGallerySlides(imageUrls);
+
+            // 2. Set index
+            currentIndex = startIndex;
+
+            // 3. Open UI
+            gallery.classList.add('is-open');
+            gallery.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            // 4. Position immediately
+            updateGallery(true);
+        };
+        // 1. Target the specific section and its image containers
+        const sectionElements = document.querySelectorAll('.s-a-a-5 .s-a-a-5-element');
+
+        // Safety check
+        if (sectionElements.length === 0) return;
+
+        // 2. Build the array of Image URLs from this specific section
+        // We look inside each element to find the <img> tag
+        const imageUrls = Array.from(sectionElements).map(element => {
+            const img = element.querySelector('img');
+            return img ? img.currentSrc || img.src : '';
+        });
+
+        // 3. Attach Click Event Listeners
+        sectionElements.forEach((element, index) => {
+            element.addEventListener('click', function () {
+                // Call the global function you defined previously
+                // Passing the array of URLs and the index of the clicked image
+                if (window.openGlobalGallery) {
+                    window.openGlobalGallery(imageUrls, index);
+                } else {
+                    console.error("Gallery function not found");
+                }
+            });
+        });
+    })();
 })();

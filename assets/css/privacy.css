@@ -53,12 +53,14 @@
 
 .toc li {
   margin: 8px 0;
-  opacity: 0.6; /* default dimmed for both text + number */
+  opacity: 0.6;
+  /* default dimmed for both text + number */
   transition: opacity 0.2s ease;
 }
 
 .toc li.active {
-  opacity: 1; /* brighten number + text together */
+  opacity: 1;
+  /* brighten number + text together */
 }
 
 .toc a {
@@ -70,7 +72,8 @@
 }
 
 .toc li::marker {
-  opacity: inherit; /* sync marker opacity with li */
+  opacity: inherit;
+  /* sync marker opacity with li */
 }
 
 .simple-picture {
@@ -212,7 +215,8 @@
   font-size: 18px;
 }
 
-.arrow-a::before, .arrow-a::after {
+.arrow-a::before,
+.arrow-a::after {
   content: "";
   display: block;
   width: 21px;
@@ -253,7 +257,9 @@
 }
 
 @media (max-width: 992px) {
-  .acordation-text-1, .acordation-text-2, .acordation-grid {
+  .acordation-text-1,
+  .acordation-text-2,
+  .acordation-grid {
     grid-column: span 12;
   }
   .simple-picture-faq .simple-picture-holder {
