@@ -1124,7 +1124,11 @@
     const nextBtn = root.querySelector('.slider-btn.next');
     const leftBox = root.querySelector('.section-2-right-down-left');
     const rightDown = root.querySelector('.section-2-right-down-right');
+
     const leftHold = root.querySelector('.section-2-left-holder');
+    const leftWrapper = root.querySelector('.section-2-left');
+    const rightWrapper = root.querySelector('.section-2-right');
+
     const numWrap = root.querySelector('.num-swap-wrap');
     const numAllEl = root.querySelector('.section-2-numbers-all');
     const progressEl = root.querySelector('.progress-bar-p');
@@ -1138,11 +1142,52 @@
 
     let currentIndex = 0;
     let isAnimating = false;
-    const COOLDOWN_MS = 1000;
+    const COOLDOWN_MS = 800;
 
     function startCooldown() {
       isAnimating = true;
       setTimeout(() => { isAnimating = false; }, COOLDOWN_MS);
+    }
+
+
+    // --- 1. PREPARE GALLERY DATA ---
+    const sectionImageUrls = slideEls.map(slide => {
+      const pic = slide.querySelector('.slide-picture img');
+      return pic ? pic.src : '';
+    }).filter(url => url !== '');
+
+    // Helper: Calculate "Previous" Image Index (with wrap-around)
+    const getVisualIndex = () => {
+      const total = slideEls.length;
+      // If current is 0, (0 - 1 + 5) % 5 = 4. 
+      return (currentIndex - 1 + total) % total;
+    };
+
+    // Helper to trigger gallery
+    const triggerGallery = () => {
+      if (typeof window.openGlobalGallery === 'function') {
+        // Open gallery to the visual (previous) image
+        window.openGlobalGallery(sectionImageUrls, getVisualIndex());
+      }
+    };
+
+    // --- 2. LEFT SIDE CLICK ---
+    if (leftWrapper) {
+      leftWrapper.style.cursor = 'zoom-in';
+      leftWrapper.addEventListener('click', triggerGallery);
+    }
+
+    // --- 3. RIGHT SIDE CLICK (With Exclusion) ---
+    if (rightWrapper) {
+      rightWrapper.style.cursor = 'zoom-in';
+      const rightUp = rightWrapper.querySelector('.section-2-right-up');
+      if (rightUp) rightUp.style.cursor = 'default';
+
+      rightWrapper.addEventListener('click', (e) => {
+        if (e.target.closest('.section-2-right-up')) return;
+        if (e.target.closest('a')) return;
+        triggerGallery();
+      });
     }
 
     // Generate Thumbnails
@@ -1182,7 +1227,7 @@
           e.stopPropagation();
           if (isAnimating) return;
           startCooldown();
-          goTo(idx);
+          goTo(idx + 1 );
         });
 
         thumbTrack.appendChild(card);
@@ -1373,7 +1418,7 @@
     function closeGallery() {
       gallery.classList.remove('is-open');
       gallery.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      lenis.start();
     }
 
     // 4. Navigation
@@ -1411,7 +1456,7 @@
       // 3. Open UI
       gallery.classList.add('is-open');
       gallery.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      lenis.stop();
 
       // 4. Position immediately
       updateGallery(true);

@@ -3540,7 +3540,7 @@ h4 {
 }
 
 .section-argo-3-element {
-  grid-column: span 4;
+  grid-column: span 5;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3571,13 +3571,16 @@ h4 {
   width: 2px;
   background-color: #1B1E2B;
   height: 100%;
-  right: -19px;
+  right: -14px;
   top: 0px;
   position: absolute;
 }
 
 .section-argo-3 {
   .grid {
+    .section-argo-3-element:first-of-type {
+      grid-column: 2/span 5;
+    }
     .section-argo-3-element:last-of-type:after {
       display: none;
     }
@@ -3810,6 +3813,20 @@ h4 {
   .section-2-argo p {
     font-size: 30px;
   }
+  .section-argo-3-element {
+      grid-column: span 6;
+    }
+.section-argo-3 {
+  .grid {
+    .section-argo-3-element:first-of-type {
+      grid-column: span 6;
+    }
+  }
+}
+  .section-argo-3 .grid {
+  row-gap: 40px;
+  
+}
 }
 
 
@@ -4092,6 +4109,31 @@ h4 {
   .slider-btn span {
     font-size: 18px;
   }
+    .section-argo-3-element{
+    grid-column: span 12;
+  }
+   .section-argo-3 .grid .section-argo-3-element:first-of-type {
+    grid-column: span 12;
+  }
+  .section-argo-3-element-second::after{
+    display: block;
+  }
+  .section-argo-3-element::after{
+    display: block;
+    bottom: -20px;
+    top: auto;
+    height: 2px;
+    width: 100%;
+    right: 0;
+  }
+  .section-argo-3 .grid .section-argo-3-element:last-of-type {
+  grid-column: span 12;
+  
+}
+  .section-argo-3 .grid {
+  row-gap: 40px;
+  
+}
 }
 
 .loader-ring {
