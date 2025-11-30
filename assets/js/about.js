@@ -472,22 +472,45 @@ textPagination.forEach((item) => {
 
     // --- PART 2: Inner Tabs Switching ---
     tabHeaders.forEach((header, index) => {
-        header.addEventListener('click', () => {
-            // Remove active class from all
-            tabHeaders.forEach(h => h.classList.remove('s-a-a-4-acordation-bottom-top-element-active'));
-            tabContents.forEach(c => c.classList.remove('s-a-a-4-acordation-bottom-bottom-active'));
+    header.addEventListener('click', () => {
+        // 1. Get the current visual height before changing anything
+        const startHeight = accordionBottom.scrollHeight;
+        
+        // 2. Lock the height explicitly to prevent the "snap"
+        accordionBottom.style.height = startHeight + "px";
 
-            // Add active class to clicked element
-            header.classList.add('s-a-a-4-acordation-bottom-top-element-active');
+        // 3. Perform the Tab Switch
+        tabHeaders.forEach(h => h.classList.remove('s-a-a-4-acordation-bottom-top-element-active'));
+        tabContents.forEach(c => c.classList.remove('s-a-a-4-acordation-bottom-bottom-active'));
+        
+        header.classList.add('s-a-a-4-acordation-bottom-top-element-active');
+        if (tabContents[index]) {
+            tabContents[index].classList.add('s-a-a-4-acordation-bottom-bottom-active');
+        }
 
-            if (tabContents[index]) {
-                tabContents[index].classList.add('s-a-a-4-acordation-bottom-bottom-active');
-            }
+        // 4. Calculate the new height required
+        // We temporarily set height to auto to measure the new content, then immediately set it back
+        accordionBottom.style.height = 'auto';
+        const newHeight = accordionBottom.scrollHeight;
+        accordionBottom.style.height = startHeight + "px"; // Reset to start height instantly
 
-            // Recalculate height immediately after switching tabs
-            updateAccordionHeight();
+        // 5. Trigger the animation in the next frame
+        requestAnimationFrame(() => {
+            // Force a browser reflow so it acknowledges the start height
+            accordionBottom.offsetHeight; 
+            
+            // Set both height and max-height to the new value to trigger transition
+            accordionBottom.style.height = newHeight + "px";
+            accordionBottom.style.maxHeight = newHeight + "px";
         });
+
+        // 6. Cleanup after transition (approx 400ms matches CSS transition)
+        // This sets height back to 'auto' so the accordion stays responsive to window resizing
+        setTimeout(() => {
+            accordionBottom.style.height = null; 
+        }, 400); 
     });
+});
 
     // --- PART 3: Window Resize Handler (The New Fix) ---
     window.addEventListener('resize', function () {

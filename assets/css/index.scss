@@ -595,12 +595,13 @@ header img {
 }
 
 .slider-btn:hover {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: #1B1E2B;
+
+  span {
+    color: white;
+  }
 }
 
-.slider-btn:disabled:hover {
-  background-color: hsla(0, 0%, 91%, 0.9);
-}
 
 .slider-btn:disabled {
   opacity: .5;
@@ -3045,23 +3046,11 @@ header img {
   grid-column: span 12;
 
   div {
+
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     height: 100%;
-
-    h3 {
-      font-size: 60px;
-      color: white;
-      line-height: 1.1;
-      text-transform: uppercase;
-      font-weight: 400;
-      width: 75%;
-
-      span {
-        font-family: "Lora", serif;
-      }
-    }
 
     h4 {
       font-size: 60px;
@@ -3069,10 +3058,10 @@ header img {
       line-height: 1.1;
       text-transform: uppercase;
       font-weight: 400;
-      width: 60%;
+      width: 95%;
 
       span {
-        font-family: "Lora", serif;
+        color: white;
       }
     }
 
@@ -3082,12 +3071,10 @@ header img {
       line-height: 1.1;
       text-transform: uppercase;
       font-weight: 400;
-      width: 100%;
-      text-align: start;
-      margin-bottom: 32px;
+      width: 95%;
 
       span {
-        font-family: "Lora", serif;
+        color: white;
       }
     }
   }
@@ -3318,7 +3305,7 @@ h4 {
   position: relative;
 }
 
-.line {
+.line-a {
   display: block;
   overflow: hidden;
   line-height: inherit;
@@ -3469,7 +3456,7 @@ h4 {
 
   span {
     font-size: 22px;
-    color: white;
+    color: #1B1E2B;
     text-transform: uppercase;
 
   }
@@ -3492,7 +3479,6 @@ h4 {
 }
 
 .slider-btn:hover {
-  opacity: .5;
 
   img {
     transform: translateX(10px);
@@ -3550,6 +3536,77 @@ h4 {
   h3 {
     text-transform: uppercase;
 
+  }
+}
+
+.section-argo-3-element {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 24px 0px;
+  transition: .5s;
+
+  h3 {
+    line-height: 121%;
+  }
+
+  h5 {
+    font-family: 'TT Norms Pro Expanded';
+    font-weight: 400;
+  }
+}
+
+.section-argo-3-element:hover {
+  opacity: .5;
+
+  .section-argo-3-square {
+    scale: 0.8;
+  }
+}
+
+.section-argo-3-element::after {
+  content: '';
+  width: 2px;
+  background-color: #1B1E2B;
+  height: 100%;
+  right: -19px;
+  top: 0px;
+  position: absolute;
+}
+
+.section-argo-3 {
+  .grid {
+    .section-argo-3-element:last-of-type:after {
+      display: none;
+    }
+  }
+}
+
+.section-argo-3-square {
+  transform: rotate(45deg);
+  border: 2px solid #1B1E2B;
+  background-color: transparent;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  display: flex;
+  margin-bottom: 9px;
+  margin-top: 36px;
+  transition: .5s;
+}
+
+.floating {
+  left: 50%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  color: #1B1E2B;
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+
+  path {
+    stroke: #1B1E2B;
   }
 }
 
@@ -3749,6 +3806,7 @@ h4 {
     flex-direction: column;
     justify-content: space-between;
   }
+
   .section-2-argo p {
     font-size: 30px;
   }
@@ -3775,6 +3833,11 @@ h4 {
   .booking-div {
     right: 24px;
     bottom: 24px;
+    max-width: calc(100% - 48px);
+  }
+
+  .section-2-right-down-left div h4 {
+    font-size: 50px;
   }
 
   .section-2-argo p,
@@ -4004,26 +4067,31 @@ h4 {
 
   .section-2-right-down-left div p {
     font-size: 40px;
+    display: none;
   }
 
   .section-2-right-down-right .thumb-card {
     flex: 0 0 75%;
   }
+
   .slider-btn {
-  width: 80px;
-  height: 80px;
+    width: 80px;
+    height: 80px;
 
   }
+
   .slider-btn {
-  transition: 0.3s;
-  display: flex;
+    transition: 0.3s;
+    display: flex;
   }
+
   .buttons-slider {
-  gap: 18px;
+    gap: 18px;
   }
+
   .slider-btn span {
-  font-size: 18px;
-}
+    font-size: 18px;
+  }
 }
 
 .loader-ring {

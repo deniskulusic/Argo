@@ -708,7 +708,7 @@
     const state = growSections.map((section) => {
       const pin = section.querySelector('.pin');
       const frame = section.querySelector('.frame');
-      const video = frame ? frame.querySelector('img') : null;
+      const video = frame ? frame.querySelector('.section-2-left') : null;
 
       // Frame (container) scale range
       const startScale = parseFloat(section.dataset.growStart || 0.7);
@@ -883,19 +883,20 @@
   document.addEventListener('DOMContentLoaded', loadbar, false);
 
   /* ============================
-       SECTION 1 MAIN SLIDER
-       ============================ */
+     1. MAIN SLIDER (SECTION 1)
+     ============================ */
   (function () {
     const viewport = document.querySelector('.slider-viewport');
     const track = document.querySelector('.slider-track');
+
     if (!viewport || !track) return;
 
     const cards = Array.from(track.querySelectorAll('.card'));
     const btnPrev = document.querySelector('.slider-btn.prev');
     const btnNext = document.querySelector('.slider-btn.next');
 
-    const GAP = 32;
-    const CARD_W = 640;
+    const GAP = 32;     // px between cards
+    const CARD_W = 640; // px per card
     const STEP = CARD_W + GAP;
 
     let offset = 0;
@@ -918,8 +919,15 @@
       if (btnNext) btnNext.disabled = (maxAbs >= maxScroll - 0.5);
     }
 
-    function next() { offset = clampOffset(offset - STEP); update(); }
-    function prev() { offset = clampOffset(offset + STEP); update(); }
+    function next() {
+      offset = clampOffset(offset - STEP);
+      update();
+    }
+
+    function prev() {
+      offset = clampOffset(offset + STEP);
+      update();
+    }
 
     if (btnNext) btnNext.addEventListener('click', next);
     if (btnPrev) btnPrev.addEventListener('click', prev);
@@ -929,17 +937,138 @@
 
 
   /* ============================
-       SHARED HELPERS
-       ============================ */
+     2. SHARED HELPERS
+     ============================ */
 
-  // IMAGE WIPE LOGIC
+  function splitIntoLines(blockEl) {
+    const walker = document.createTreeWalker(blockEl, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.nodeValue.replace(/\s/g, '').length
+          ? NodeFilter.FILTER_ACCEPT
+          : NodeFilter.FILTER_REJECT;
+      }
+    });
+
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+    const seg = (typeof Intl !== 'undefined' && Intl.Segmenter)
+      ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+      : null;
+
+    textNodes.forEach((tn) => {
+      const src = tn.nodeValue;
+      let pieces = src.split(/(\s+)/).filter(s => s.length > 0);
+
+      if (pieces.length === 1) {
+        pieces = seg
+          ? Array.from(seg.segment(src), s => s.segment)
+          : Array.from(src);
+      }
+
+      const frag = document.createDocumentFragment();
+      pieces.forEach((part) => {
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else {
+          const span = document.createElement('span');
+          span.className = 'word-token';
+          span.style.display = 'inline-block';
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+      tn.parentNode.replaceChild(frag, tn);
+    });
+
+    const tokens = Array.from(blockEl.querySelectorAll('.word-token'));
+    if (!tokens.length) return;
+
+    const lines = [];
+    let currentTop = null;
+    let group = [];
+
+    tokens.forEach((tok) => {
+      const top = Math.round(tok.getBoundingClientRect().top);
+      if (currentTop === null || Math.abs(top - currentTop) <= 1) {
+        currentTop = (currentTop === null) ? top : currentTop;
+        group.push(tok);
+      } else {
+        lines.push(group);
+        group = [tok];
+        currentTop = top;
+      }
+    });
+    if (group.length) lines.push(group);
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'line-block';
+    lines.forEach((arr) => {
+      const line = document.createElement('span');
+      line.className = 'line-a';
+      const inner = document.createElement('span');
+      inner.className = 'line-inner';
+      arr.forEach((tok) => inner.appendChild(tok));
+      line.appendChild(inner);
+      wrapper.appendChild(line);
+    });
+
+    blockEl.innerHTML = '';
+    blockEl.appendChild(wrapper);
+  }
+
+  function buildLeftPerLineFromSlide(slideEl) {
+    const wrap = document.createElement('div');
+    const src = slideEl.querySelector('.slide-text');
+    wrap.innerHTML = src ? src.innerHTML : '';
+    wrap.querySelectorAll('h4, h3, p').forEach(splitIntoLines);
+    return wrap;
+  }
+
+  function swapLeftTextPerLine(container, slideEl) {
+    if (!container) return;
+    const current = container.lastElementChild;
+    const nextEl = buildLeftPerLineFromSlide(slideEl);
+
+    // Set height to prevent layout jump
+    const h = container.offsetHeight;
+    if (h > 0) container.style.minHeight = h + 'px';
+
+    nextEl.querySelectorAll('.line-a').forEach((line) => line.classList.add('line-enter'));
+    container.appendChild(nextEl);
+    nextEl.offsetHeight; // force reflow
+
+    if (current) {
+      current.querySelectorAll('.line-a').forEach((line) => line.classList.add('line-exit'));
+      current.offsetHeight;
+      current.classList.add('line-exit-active');
+      current.querySelectorAll('.line-a').forEach((line) => line.classList.add('line-exit-active'));
+    }
+
+    nextEl.querySelectorAll('.line-a').forEach((line) => {
+      line.classList.add('line-enter-active');
+    });
+
+    const lastIncoming = nextEl.querySelector('.line-a:last-child .line-inner') || nextEl;
+    lastIncoming.addEventListener('transitionend', () => {
+      if (current) current.remove();
+      nextEl.querySelectorAll('.line-a').forEach((line) => {
+        line.classList.remove('line-enter', 'line-enter-active');
+      });
+      container.style.minHeight = '';
+    }, { once: true });
+  }
+
   function swapLeftImageWipe(slideEl, leftHold) {
     if (!leftHold) return;
 
-    // Look for .slide-left-picture first, fallback to .slide-picture
-    const pic = slideEl.querySelector('.slide-left-picture') || slideEl.querySelector('.slide-picture');
-    const nextHTML = pic ? pic.innerHTML : '';
+    // LOOK FOR .slide-left-picture FIRST (The new logic)
+    let pic = slideEl.querySelector('.slide-left-picture');
 
+    // Fallback to .slide-picture if left specific one doesn't exist
+    if (!pic) pic = slideEl.querySelector('.slide-picture');
+
+    const nextHTML = pic ? pic.innerHTML : '';
     if (!nextHTML) return;
 
     const overlay = document.createElement('div');
@@ -947,7 +1076,7 @@
     overlay.innerHTML = nextHTML;
 
     leftHold.appendChild(overlay);
-    overlay.offsetHeight; // Force reflow
+    overlay.offsetHeight;
     overlay.classList.add('wipe-enter-active');
 
     overlay.addEventListener('transitionend', () => {
@@ -959,18 +1088,15 @@
     }, { once: true });
   }
 
-  // NUMBER SWAP LOGIC
   function swapNumber(numWrap, newStr) {
     if (!numWrap) return;
     const current = numWrap.querySelector('.num-swap');
     const nextNum = document.createElement('span');
     nextNum.className = 'section-2-numbers-current num-swap num-enter from-top';
     nextNum.textContent = newStr;
-
     numWrap.appendChild(nextNum);
     nextNum.offsetHeight;
     nextNum.classList.add('num-enter-active');
-
     if (current) {
       current.classList.add('num-exit', 'to-bottom', 'num-exit-active');
       current.addEventListener('transitionend', () => current.remove(), { once: true });
@@ -986,57 +1112,71 @@
     progressEl.style.setProperty('--progress', `${progress}%`);
   }
 
+
   /* ============================
-     PER-SECTION INITIALIZER
+     3. PER-SECTION LOGIC
      ============================ */
   function initSection(root) {
     if (!root) return;
 
+    // Selectors
     const prevBtn = root.querySelector('.slider-btn.prev');
     const nextBtn = root.querySelector('.slider-btn.next');
+    const leftBox = root.querySelector('.section-2-right-down-left');
     const rightDown = root.querySelector('.section-2-right-down-right');
     const leftHold = root.querySelector('.section-2-left-holder');
     const numWrap = root.querySelector('.num-swap-wrap');
     const numAllEl = root.querySelector('.section-2-numbers-all');
     const progressEl = root.querySelector('.progress-bar-p');
 
+    // Slides
     const slideEls = Array.from(root.querySelectorAll('.section-2-slides .slide'));
-    if (!slideEls.length) return;
+    if (!slideEls.length) return; // Exit if no slides found
 
+    // Set Total Count
     if (numAllEl) numAllEl.textContent = String(slideEls.length).padStart(2, '0');
 
     let currentIndex = 0;
+    let isAnimating = false;
+    const COOLDOWN_MS = 1000;
 
-    // Initial Fill of Left Holder if empty
-    if (leftHold && !leftHold.querySelector('.fit')) {
-      const fit = document.createElement('div');
-      fit.className = 'fit';
-      leftHold.appendChild(fit);
+    function startCooldown() {
+      isAnimating = true;
+      setTimeout(() => { isAnimating = false; }, COOLDOWN_MS);
     }
 
-    // === THUMBNAIL LOGIC ===
+    // Generate Thumbnails
     const thumbViewport = rightDown ? rightDown.querySelector('.thumb-viewport') : null;
     const thumbTrack = rightDown ? rightDown.querySelector('.thumb-track') : null;
     const thumbCards = [];
 
-    if (thumbViewport && thumbTrack && slideEls.length) {
+    if (thumbViewport && thumbTrack) {
+      // CLEAR EXISTING (in case init runs twice)
+      thumbTrack.innerHTML = '';
+
       slideEls.forEach((slideEl, idx) => {
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'thumb-card';
 
-        // Thumbnail Image
+        // Clone image
         const pic = slideEl.querySelector('.slide-picture picture, .slide-picture img');
         if (pic) card.appendChild(pic.cloneNode(true));
 
-        // Thumbnail Label (Uses <p> from slide-text)
-        const pEl = slideEl.querySelector('.slide-text p');
-        if (pEl) {
-          const label = document.createElement('div');
-          label.className = 'thumb-label';
-          label.textContent = pEl.textContent.trim();
-          card.appendChild(label);
-        }
+        // ---- ROTATE LABELS +1 ----
+        // thumb 0 → slide 1
+        // thumb 1 → slide 2
+        // thumb 2 → slide 3
+        // thumb 3 → slide 4
+        // thumb 4 → slide 0
+        const rotatedIndex = (idx + 1) % slideEls.length;
+        const labelP = slideEls[rotatedIndex].querySelector('.slide-text p');
+
+        const label = document.createElement('div');
+        label.className = 'thumb-label';
+        label.textContent = labelP ? labelP.textContent.trim() : "";
+        card.appendChild(label);
+        // ----------------------------------
 
         card.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -1048,171 +1188,135 @@
         thumbTrack.appendChild(card);
         thumbCards.push(card);
       });
+
+
+
     }
 
     function updateThumbPosition(index) {
       if (!thumbViewport || !thumbTrack || !thumbCards.length) return;
-      const activeCard = thumbCards[index];
+
       thumbCards.forEach((c, i) => c.classList.toggle('is-active', i === index));
+
       const trackWidth = thumbTrack.scrollWidth;
       const viewportWidth = thumbViewport.clientWidth;
+      const activeCard = thumbCards[index];
+
+      // Simple centering logic or scroll to view
       let targetX = -activeCard.offsetLeft;
+
+      // Clamp
       const maxScroll = Math.max(0, trackWidth - viewportWidth);
       if (targetX < -maxScroll) targetX = -maxScroll;
       if (targetX > 0) targetX = 0;
+
       thumbTrack.style.transform = `translateX(${targetX}px)`;
     }
 
-    let isAnimating = false;
-    function startCooldown() {
-      isAnimating = true;
-      setTimeout(() => { isAnimating = false; }, 1200);
-    }
-
     function goTo(idx) {
-      if (!slideEls.length) return;
-
-      // Handle wrap-around
       if (idx < 0) idx = slideEls.length - 1;
       if (idx >= slideEls.length) idx = 0;
 
       currentIndex = idx;
 
-      // === CHANGE IS HERE ===
-      // We want the image from 2 slides ago (looping backward)
-      const total = slideEls.length;
-      const visualIndex = (currentIndex - 2 + total) % total;
-      // ======================
-
       const slideElCurrent = slideEls[currentIndex];
-      const slideElVisual = slideEls[visualIndex]; // Grabs the offset image
+      // For left big image, we usually want the current one, 
+      // unless you specifically want the "Previous" visual logic. 
+      // Standard carousel: show Current Image.
 
       const numStr = slideElCurrent.dataset.number || String(currentIndex + 1).padStart(2, '0');
 
-      // 2. UPDATE DOM
-      swapLeftImageWipe(slideElVisual, leftHold);
+      // 1. Text
+      swapLeftTextPerLine(leftBox, slideElCurrent);
+      // 2. Large Image
+      swapLeftImageWipe(slideElCurrent, leftHold);
+      // 3. Number
       swapNumber(numWrap, numStr);
+      // 4. Progress
       setProgressBar(progressEl, currentIndex, slideEls.length);
-
-      // 3. UPDATE THUMBNAILS (Keeps current index logic)
+      // 5. Thumbs
       updateThumbPosition(currentIndex);
     }
 
-    // START
+    // Initial Load
     goTo(0);
 
-    /* =========================================
-       NEW: CLICK TO OPEN GALLERY LOGIC
-       ========================================= */
-    const rightTrigger = root.querySelector('.section-2-right');
-    const excludedArea = root.querySelector('.section-2-right-up');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (isAnimating) return;
+        startCooldown();
+        goTo(currentIndex + 1);
+      });
+    }
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (isAnimating) return;
+        startCooldown();
+        goTo(currentIndex - 1);
+      });
+    }
 
-    if (rightTrigger) {
-      // Optional: visual cue that this area is clickable
-      rightTrigger.style.cursor = 'pointer';
-      if (excludedArea) excludedArea.style.cursor = 'default';
+    if (thumbViewport) {
+      window.addEventListener('resize', () => updateThumbPosition(currentIndex));
+    }
+  }
 
-      rightTrigger.addEventListener('click', (e) => {
-        // 1. THE CONSTRAINT: 
-        // Check if the clicked element is inside the "up" section.
-        // If yes, stop immediately.
-        if (e.target.closest('.section-2-right-up')) return;
 
-        // 2. GATHER IMAGES:
-        // Map through slideEls to get all image Sources
-        const galleryImages = slideEls.map(slide => {
-          const img = slide.querySelector('.slide-picture img');
-          return img ? img.src : '';
-        }).filter(src => src !== '');
+  /* ============================
+     4. INITIALIZATION (DOM READY)
+     ============================ */
 
-        // 3. OPEN GALLERY:
-        // Use the global function you created, passing the current slide index
-        if (window.openGlobalGallery) {
-          window.openGlobalGallery(galleryImages, currentIndex);
+  document.addEventListener('DOMContentLoaded', () => {
+
+    function initSectionOnce(section) {
+      if (!section || section.dataset.initialized === 'true') return;
+      initSection(section);
+      section.dataset.initialized = 'true';
+    }
+
+    // 1. Tabs & Galleries
+    const tabs = Array.from(document.querySelectorAll('.pre-section-2 .gallery-tab'));
+    const galleries = Array.from(document.querySelectorAll('.section-2'));
+
+    // Logic to show specific gallery
+    function showGalleryById(id) {
+      galleries.forEach(sec => {
+        if (sec.id === id) {
+          sec.classList.add('is-active');
+          initSectionOnce(sec);
+        } else {
+          sec.classList.remove('is-active');
         }
       });
     }
 
-    if (nextBtn) nextBtn.addEventListener('click', () => { if (!isAnimating) { startCooldown(); goTo(currentIndex + 1); } });
-    if (prevBtn) prevBtn.addEventListener('click', () => { if (!isAnimating) { startCooldown(); goTo(currentIndex - 1); } });
-    if (thumbViewport) window.addEventListener('resize', () => updateThumbPosition(currentIndex));
-  }
-
-  function initSectionOnce(section) {
-    if (!section || section.dataset.initialized === 'true') return;
-    initSection(section);
-    section.dataset.initialized = 'true';
-  }
-
-  /* ============================
-     TABS & AUTO-INIT
-     ============================ */
-
-  const tabs = Array.from(document.querySelectorAll('.pre-section-2 .gallery-tab'));
-  const galleries = Array.from(document.querySelectorAll('.section-2'));
-
-  function showGalleryById(id) {
-    galleries.forEach(sec => {
-      if (sec.id === id) {
+    if (tabs.length > 0) {
+      // -- Scenario A: Tabs exist --
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.dataset.gallery;
+          tabs.forEach(t => t.classList.remove('tab-active'));
+          tab.classList.add('tab-active');
+          showGalleryById(targetId);
+        });
+      });
+      // Init first tab
+      const firstId = tabs[0].dataset.gallery;
+      tabs[0].classList.add('tab-active');
+      showGalleryById(firstId);
+    } else {
+      // -- Scenario B: No tabs (Single Gallery) --
+      // Just init every section-2 found in the DOM
+      galleries.forEach(sec => {
         sec.classList.add('is-active');
         initSectionOnce(sec);
-      } else {
-        sec.classList.remove('is-active');
-      }
-    });
-  }
-
-  if (tabs.length) {
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('tab-active'));
-        tab.classList.add('tab-active');
-        showGalleryById(tab.dataset.gallery);
       });
-    });
-    const firstId = tabs[0].dataset.gallery;
-    tabs[0].classList.add('tab-active');
-    showGalleryById(firstId);
-  }
-  else {
-    galleries.forEach(sec => {
-      sec.classList.add('is-active');
-      initSectionOnce(sec);
-    });
-  }
+    }
 
-  // Also init section-6 if it exists
-  document.querySelectorAll('.section-6').forEach(initSectionOnce);
+    // 2. Init Section 6 (if exists)
+    document.querySelectorAll('.section-6').forEach(initSectionOnce);
 
-  // Select all videos: The header ones AND the section one
-  // We select .hero-video (header) and .video-on-scroll (your previous section)
-  const videos = document.querySelectorAll("video");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      // "target" is the specific video element being watched
-      const video = entry.target;
-
-      if (entry.isIntersecting) {
-        // Video is in view: Play it
-        // We add a safety check to ensure we don't play hidden (display:none) videos
-        if (video.offsetWidth > 0 && video.offsetHeight > 0) {
-          video.play().catch(e => console.log("Auto-play prevented"));
-        }
-      } else {
-        // Video went off screen: Pause it
-        video.pause();
-      }
-    });
-  }, {
-    threshold: 0.1 // Trigger as soon as 10% of the video is visible/hidden
   });
-
-  // Attach the observer to every video found
-  videos.forEach((video) => {
-    observer.observe(video);
-  });
-
 
   /* ================= GALLERY LOGIC (DYNAMIC REUSABLE) ================= */
   (function () {
@@ -1313,4 +1417,44 @@
       updateGallery(true);
     };
   })();
+
+
+
+
+
+
+
+
+
+  // Select all videos: The header ones AND the section one
+  // We select .hero-video (header) and .video-on-scroll (your previous section)
+  const videos = document.querySelectorAll("video");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // "target" is the specific video element being watched
+      const video = entry.target;
+
+      if (entry.isIntersecting) {
+        // Video is in view: Play it
+        // We add a safety check to ensure we don't play hidden (display:none) videos
+        if (video.offsetWidth > 0 && video.offsetHeight > 0) {
+          video.play().catch(e => console.log("Auto-play prevented"));
+        }
+      } else {
+        // Video went off screen: Pause it
+        video.pause();
+      }
+    });
+  }, {
+    threshold: 0.1 // Trigger as soon as 10% of the video is visible/hidden
+  });
+
+  // Attach the observer to every video found
+  videos.forEach((video) => {
+    observer.observe(video);
+  });
+
+
+
 })();
