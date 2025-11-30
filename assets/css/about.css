@@ -402,6 +402,50 @@ header img {
   /* Pill expansion */
 }
 
+.text-pagination {
+  grid-column: span 12;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.text-pagination h4 {
+  cursor: pointer;
+  font-weight: 500;
+  opacity: 0.5;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.text-pagination h4::after {
+  width: 0%;
+  height: 2px;
+  background-color: black;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  transition: 0.3s;
+}
+
+.text-pagination h4:hover::after {
+  width: 100%;
+}
+
+.text-pagination h4:hover {
+  opacity: 1;
+}
+
+.text-pagination h4.active {
+  opacity: 1;
+}
+
+.text-pagination h4.active::after {
+  width: 100%;
+}
+
 /*Section Argo About 3*/
 .s-a-a-3-container {
   display: flex;

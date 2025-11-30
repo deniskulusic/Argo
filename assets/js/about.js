@@ -304,6 +304,7 @@
         })
     }
 
+    
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -324,22 +325,28 @@
         }
     });
 
-    // 2. Pagination Dots Setup
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active');
+    // TEXT PAGINATION
+const textPagination = document.querySelectorAll('#textPagination h4');
 
-        dot.addEventListener('click', () => {
-            if (index === currentIndex || isAnimating) return;
+// Initialize first as active
+textPagination[0].classList.add('active');
+
+// Replace dot update with text update:
+function updateTextPagination(newIndex) {
+    textPagination.forEach(item => item.classList.remove('active'));
+    textPagination[newIndex].classList.add('active');
+}
+
+// Add click listeners
+textPagination.forEach((item) => {
+    item.addEventListener('click', () => {
+        const index = Number(item.dataset.index);
+        if (index !== currentIndex && !isAnimating) {
             const direction = index > currentIndex ? 'next' : 'prev';
             handleSlideChange(direction, index);
-        });
-
-        paginationContainer.appendChild(dot);
+        }
     });
-
-    const dots = document.querySelectorAll('.dot');
+});
 
     // 3. Main Slide Logic
     function handleSlideChange(direction, specificIndex = null) {
@@ -386,8 +393,7 @@
         }
 
         // Update Dots
-        dots[currentIndex].classList.remove('active');
-        dots[incomingIndex].classList.add('active');
+        updateTextPagination(incomingIndex);
 
         // --- C. Cleanup ---
         setTimeout(() => {
