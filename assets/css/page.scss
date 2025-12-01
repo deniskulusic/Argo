@@ -322,7 +322,7 @@ position: relative;
     }
 }
 
-/*Section argo about 5*/
+/*Section argo about 6*/
 .s-a-a-6-top {
     display: flex;
     grid-column: span 12;
@@ -377,12 +377,12 @@ position: relative;
 
 .s-a-a-6-bottom {
     grid-column: span 12;
-    margin-top: 32px;
+    margin-top: 70px;
     display: none;
 }
 
 .s-a-a-6-bottom-left {
-    grid-column: span 6;
+    grid-column: 8/span 5;
 }
 
 /* 1. Define the animations */
@@ -416,7 +416,7 @@ position: relative;
 }
 
 .s-a-a-6-bottom-right {
-    grid-column: 8/span 5;
+    grid-column: span 6;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -502,8 +502,70 @@ position: relative;
         filter: brightness(10000%)
     }
 }
+.s-a-a-6-bottom-left{
+    position: relative;
+    padding-top: 100px;
+}
+.s-a-p-6-img-2{
+width: 45.5%;
+  position: absolute;
+  bottom: 17%;
+  left: -50%;
 
+  z-index: 2;
+}
+.s-a-a-6-bottom{
+.s-a-p-3-img-text-el-1 {
+  font-size: 50px;
+  line-height: 1.1;
+}
+.s-a-p-3-img-text-el-2 {
+  width: 65%;
+}
+}
 
+.s-a-p-6-img-2-holder{
+    padding-top: 120%;
+    position: relative;
+}
+.s-a-a-6-bottom-left-holder {
+    padding-top: 140%;
+    position: relative;
+}
+.s-a-p-3-img-text-el-3{
+    text-align: left;
+    font-size: 21px;
+    margin-top: 12px;
+}
+.s-a-p-3-img-text-el-4{
+    list-style-type: none;
+    padding-left: 22px;
+li{
+    font-family:"TT Norms Pro Expanded", sans-serif;
+    display: flex;
+    font-size: 21px;
+    font-weight: 300;
+    align-items: center;
+}
+}
+.square {
+  background-color: #1B1E2B;
+  border: 1px solid #1B1E2B;
+  display: inline-block;
+  margin-right: 12px;
+  display: block;
+  height: 7px;
+  position: relative;
+  transform: rotate(45deg) scale(1);
+  transition: all .4s ease-out;
+  width: 7px;
+}
+.m-top-12{
+    margin-top: 12px ;
+}
+.m-top-24{
+    margin-top: 24px;
+}
 
 @media screen and (max-width: 1900px) {
 .s-a-p-3-img-2{

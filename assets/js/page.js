@@ -256,6 +256,29 @@ const parallaxGroups = [
         initialScale: 1.15,
         translateRange: 250
     },
+    {
+        wrapper: ".s-a-a-6",
+        elements: ".s-a-a-6-bottom-left-holder-1 img",
+        factors: [0.1],
+        mode: "scaleTranslate", // NEW animation
+        initialScale: 1.15,
+        translateRange: 250
+    },
+    {
+        wrapper: ".s-a-a-6",
+        elements: ".s-a-a-6-bottom-left-holder-2 img",
+        factors: [0.1],
+        mode: "scaleTranslate", // NEW animation
+        initialScale: 1.15,
+        translateRange: 250
+    },
+    {
+        wrapper: ".s-a-a-6",
+        elements: ".s-a-p-6-img-2",
+        factors: [0.3, 0.3 ,0.3],
+        mode: "parallax"
+    },
+    
 ];
 
 
@@ -299,20 +322,31 @@ window.addEventListener("resize", () => {
    TRANSFORM MERGING
 ====================================================== */
 function mergeTransform(el, newTranslateY) {
-    const computed = window.getComputedStyle(el).transform;
-
-    if (computed === "none" && !el.style.transform) {
-        return `translateY(${newTranslateY}px)`;
-    }
-
     let existing = el.style.transform;
-    if (!existing && computed !== "none") {
-        existing = computed;
+
+    // If no inline transform, read “transform” from CSS rules (NOT the computed matrix)
+    if (!existing) {
+        existing = el.getAttribute("data-original-transform");
+        if (!existing) {
+            // Extract raw CSS transform using computed style *but keep the string before conversion*
+            const style = el.getAttribute("style") || "";
+            const cssTransform = style.match(/transform:\s*([^;]+)/);
+            
+            if (cssTransform) {
+                existing = cssTransform[1].trim();
+            } else {
+                // LAST RESORT: use computed transform ONLY if not "none"
+                const computed = window.getComputedStyle(el).transform;
+                existing = computed === "none" ? "" : computed;
+            }
+        }
     }
 
-    existing = existing.replace(/translateY\([^)]*\)/g, "").trim();
+    // Remove old translateY()
+    existing = (existing || "").replace(/translateY\([^)]*\)/g, "").trim();
 
-    if (existing === "" || existing === "none") {
+    // Final combine
+    if (!existing || existing === "none") {
         return `translateY(${newTranslateY}px)`;
     }
 
