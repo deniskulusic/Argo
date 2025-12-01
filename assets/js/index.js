@@ -21,8 +21,12 @@
     easing: (t) => 1 - Math.pow(1 - t, 3),
     lerp: 0.1,
     smoothWheel: true,
-    smoothTouch: false
-  });
+    smoothTouch: false,
+        // allow native scroll in nested scroll areas
+        autoRaf: true,
+    });
+
+    document.querySelector('.menu-div').setAttribute('data-lenis-prevent', '')
   // Collect targets
   const textEls = Array.from(document.querySelectorAll('.reveal-text'));
   const imageEls = Array.from(document.querySelectorAll('.reveal-image'));
@@ -805,6 +809,7 @@
   document.querySelector(".han-menu-full").addEventListener("click", function () {
     const menu = document.querySelector(".menu-full");
     const isActive = menu.classList.toggle("menu-active");
+    document.querySelector(".menu-bg").classList.toggle("menu-active-bg");
 
     if (isActive) {
       // Disable Lenis scrolling

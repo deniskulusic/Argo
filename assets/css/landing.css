@@ -149,6 +149,7 @@ header img {
 
 .landing-content-label {
   color: #1B1E2B;
+  text-transform: uppercase;
 }
 
 .landing-content-heading {

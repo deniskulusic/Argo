@@ -5,8 +5,11 @@ if (!prefersReduced && typeof Lenis === 'function') {
     duration: 1.1,           // feel free to tweak
     smoothWheel: true,
     smoothTouch: false,
-    // easing: (t) => 1 - Math.pow(1 - t, 3), // optional custom easing
-  });
+        // allow native scroll in nested scroll areas
+        autoRaf: true,
+    });
+
+    document.querySelector('.menu-div').setAttribute('data-lenis-prevent', '')
 
   // rAF loop drives Lenis
   function raf(time) {
@@ -41,7 +44,7 @@ if (!prefersReduced && typeof Lenis === 'function') {
   let WindowHeight = window.innerHeight;
 
   lenis.on('scroll', ({ scroll }) => {
-    if (scroll > 0.5 * WindowHeight - 108) {
+    if (scroll > 0.6 * WindowHeight - 108) {
       document.querySelector(".menu-full").classList.add("menu-transparent")
     }
     else {
@@ -51,6 +54,7 @@ if (!prefersReduced && typeof Lenis === 'function') {
   document.querySelector(".han-menu-full").addEventListener("click", function () {
     const menu = document.querySelector(".menu-full");
     const isActive = menu.classList.toggle("menu-active");
+    document.querySelector(".menu-bg").classList.toggle("menu-active-bg");
 
     if (isActive) {
       // Disable Lenis scrolling

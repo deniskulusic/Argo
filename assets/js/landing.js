@@ -21,8 +21,12 @@
         easing: (t) => 1 - Math.pow(1 - t, 3),
         lerp: 0.1,
         smoothWheel: true,
-        smoothTouch: false
+        smoothTouch: false,
+        // allow native scroll in nested scroll areas
+        autoRaf: true,
     });
+
+    document.querySelector('.menu-div').setAttribute('data-lenis-prevent', '')
     // Collect targets
     const textEls = Array.from(document.querySelectorAll('.reveal-text'));
     const imageEls = Array.from(document.querySelectorAll('.reveal-image'));
@@ -185,12 +189,31 @@
     // Expose for debugging in the console
     window.__lenis = lenis;
 
+    let WindowHeight = window.innerHeight;
+    const SCALE = 0.1;
+    lenis.on('scroll', ({ scroll }) => {
+    if (scroll > 0.7 * WindowHeight - 108) {
+      document.querySelector(".menu-full").classList.add("inverted")
+    }
+    else {
+      document.querySelector(".menu-full").classList.remove("inverted")
+    }
+    document.querySelectorAll('[data-lenis-speed]').forEach((el) => {
+      const speed = parseFloat(el.dataset.lenisSpeed) || 0;
+      if (scroll < 1.5 * WindowHeight)
+        el.style.transform = `translate3d(0, ${scroll * speed * SCALE}px, 0)`;
 
+
+
+
+    });
+  });
 
 
     document.querySelector(".han-menu-full").addEventListener("click", function () {
         const menu = document.querySelector(".menu-full");
         const isActive = menu.classList.toggle("menu-active");
+        document.querySelector(".menu-bg").classList.toggle("menu-active-bg");
 
         if (isActive) {
             // Disable Lenis scrolling

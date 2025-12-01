@@ -1,5 +1,5 @@
 .menu-full {
-  background-color: transparent;
+  background-color: #F1F2F2;
 }
 
 .menu-transparent {
@@ -9,7 +9,7 @@
 .naslov {
   background-color: #F1F2F2;
   width: 100%;
-  height: 50vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,6 +355,13 @@
   h3 {
     font-size: 26px;
     line-height: 141%;
+  }
+  .faq-content {
+    font-size: 16px;
+  }
+  .acordation-grid h5 {
+    font-size: 18px;
+    padding-right: 12px;
   }
 }
 footer .main-button {

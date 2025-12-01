@@ -584,6 +584,35 @@ p {
   opacity: 0;
 }
 
+.menu-full {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+  opacity: 0;
+}
+
+.menu-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 108px;
+  background-image: url("../argo/9.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 8; /* Behind the blur */
+  opacity: 0; /* Hidden until nav is active */
+  transition: 700ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* When nav opens */
+.menu-active-bg.menu-bg {
+  opacity: 1;
+  height: 100dvh;
+}
+
 .nav-loaded {
   opacity: 1;
 }
@@ -639,7 +668,6 @@ p {
 }
 
 .menu-div {
-  overflow: scroll;
   height: 0;
   transition: 700ms cubic-bezier(0.215, 0.61, 0.355, 1);
   width: 100%;
@@ -647,13 +675,15 @@ p {
   z-index: 10;
   justify-content: baseline;
   display: flex;
-  align-items: center;
-  overflow: auto;
+  align-items: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
   /* or scroll */
   scrollbar-width: none;
   /* Firefox */
   -ms-overflow-style: none;
   /* IE/Edge */
+  will-change: transform;
 }
 
 .menu-div::-webkit-scrollbar {
@@ -676,6 +706,9 @@ p {
   gap: 90px;
   justify-content: center;
   width: 100%;
+  min-height: 100%;
+  padding-bottom: 40px;
+  padding-top: 20px;
 }
 .menu-div-left a {
   position: relative;
@@ -1209,6 +1242,11 @@ footer .button-black-inverted:hover svg {
   position: relative;
 }
 
+@media screen and (max-width: 1524px) {
+  .footer-top-1 {
+    grid-column: span 7;
+  }
+}
 /* =========================================
    TABLET BREAKPOINT (max-width: 1024px)
    ========================================= */
@@ -1438,5 +1476,8 @@ footer .button-black-inverted:hover svg {
   .section-video-holder {
     padding-top: 120%;
     position: relative;
+  }
+  .menu-bg {
+    height: 80px;
   }
 }/*# sourceMappingURL=general.css.map */

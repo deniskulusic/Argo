@@ -3285,6 +3285,23 @@ h4 .word-token {
   stroke: #1B1E2B;
 }
 
+@media screen and (max-width: 1524px) {
+  .section-argo-2-img {
+    width: 34%;
+    height: 280px;
+    position: absolute;
+    left: 50px;
+    top: -150px;
+  }
+  .section-argo-2 p {
+    grid-column: 7/span 7;
+    width: 93%;
+  }
+  .section-2-right-down-right .thumb-card {
+    flex: 0 0 67%;
+    height: 28vh;
+  }
+}
 @media screen and (max-width: 1324px) {
   .section-argo-2-img {
     width: 32%;
