@@ -46,7 +46,7 @@ header img {
   transition: 0.9s;
   opacity: 0.9;
   z-index: 2;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0, #132b51 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0, #132b51 280%);
 
 }
 
@@ -2824,7 +2824,7 @@ header img {
   max-height: 0;
   overflow: hidden;
   transition: 0.5s;
-
+line-height: 30px;
   font-size: 18px;
 }
 

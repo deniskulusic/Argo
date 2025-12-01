@@ -320,7 +320,7 @@ h2 {
 h3 {
   font-family: "aviano-sans", sans-serif;
 
-  font-weight: 500;
+  font-weight: 700;
   font-style: Medium;
   font-size: 32px;
   leading-trim: NONE;
@@ -1419,9 +1419,15 @@ footer {
 }
 
 @media screen and (max-width: 1524px) {
-
+.navbar img {
+  width: auto;
+  height: 26px;
+}
    .footer-top-1 {
   grid-column: span 7;
+}
+.navbar {
+  height: 90px;
 }
 }
 
