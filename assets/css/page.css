@@ -355,7 +355,7 @@ header img {
   transition: 0.3s;
 }
 .s-a-a-6-top-element img {
-  margin-right: 4px;
+  margin-right: 12px;
   filter: brightness(0%);
 }
 
@@ -466,10 +466,13 @@ header img {
 }
 .s-a-a-6-bottom-active .s-a-a-6-bottom-left-holder {
   /* name duration timing-function fill-mode */
-  animation: scaleUp 0.5s ease forwards;
+  animation: scaleUp 1s ease forwards;
+}
+.s-a-a-6-bottom-active .s-a-p-6-img-2-holder {
+  animation: scaleUp 1s ease forwards;
 }
 .s-a-a-6-bottom-active .s-a-a-6-bottom-right {
-  animation: fadeSlideUp 0.4s ease forwards;
+  animation: fadeSlideUp 1s ease forwards;
   /* Optional: Add a tiny delay so text appears slightly after image */
   animation-delay: 0.1s;
   /* Ensure it's invisible before animation starts (due to delay) */
@@ -568,6 +571,51 @@ header img {
 
 .m-top-24 {
   margin-top: 24px;
+}
+
+.s-a-p-7-img {
+  grid-column: 2/span 10;
+}
+
+.s-a-p-7-img-holder {
+  padding-top: 40%;
+  position: relative;
+}
+
+.s-a-p-7 .s-a-p-3-img-text-el {
+  grid-column: 3/span 8;
+  margin-top: 60px;
+}
+.s-a-p-7 .s-a-p-3-img-text-el-1, .s-a-p-7 .s-a-p-3-img-text-el-2 {
+  text-align: center;
+}
+.s-a-p-7 .s-a-p-3-img-text-el-2 {
+  width: 100%;
+}
+
+.s-a-p-7-div {
+  display: flex;
+  gap: 36px;
+  row-gap: 16px;
+  padding-top: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.s-a-p-7-div img {
+  height: 36px;
+  width: 36px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.s-a-p-7-div-div {
+  display: flex;
+  gap: 8px;
+}
+
+.s-a-p-7-div-div-text {
+  font-size: 22px;
 }
 
 @media screen and (max-width: 1900px) {
