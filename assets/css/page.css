@@ -125,11 +125,17 @@ header img {
   opacity: 0;
   will-change: opacity;
   font-weight: inherit;
+  transition: opacity 1.2s ease-out;
 }
 
 .paralax {
   height: 300vh;
   background-color: white;
+}
+
+.reveal-image {
+  transform: translateY(20px);
+  transition: transform 1200ms cubic-bezier(0.215, 0.61, 0.355, 1), opacity 1500ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .s-a-p-2 .maxw {

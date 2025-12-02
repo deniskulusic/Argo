@@ -222,9 +222,49 @@
             el.innerHTML = output.trimEnd();
         });
     }
-    splitChars(".split-chars");
+    splitChars(".split-chars, .s-a-p-3-img-text-el-1");
     const animatedTexts = [...document.querySelectorAll(".split-chars")];
 
+
+
+    /* ======================================================
+   ONCE-ONLY FADE IN FOR .s-a-p-3-img-text-el-1
+====================================================== */
+
+const titleEls = document.querySelectorAll(".s-a-p-3-img-text-el-1");
+
+// Track which elements already animated
+const animatedSet = new WeakSet();
+
+const titleObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !animatedSet.has(entry.target)) {
+            animatedSet.add(entry.target);
+            animateTitle(entry.target);
+            obs.unobserve(entry.target);
+        }
+    });
+}, {
+    root: null,
+    threshold: 0.3,     // trigger once about 30% on screen
+    rootMargin: "0px 0px -10% 0px"
+});
+
+titleEls.forEach(el => titleObserver.observe(el));
+
+
+// Animate letters
+function animateTitle(el) {
+    const chars = el.querySelectorAll(".split-char");
+
+    chars.forEach((char, i) => {
+        const delay = i * 15; // ms per letter fade-in
+
+        setTimeout(() => {
+            char.style.opacity = 1;
+        }, delay);
+    });
+}
 
     /* ======================================================
        ANIMATING ELEMENTS LOGIC INITIALIZATION
